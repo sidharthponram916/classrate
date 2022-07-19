@@ -35,7 +35,22 @@ const routes = [
     meta: { 
       authProtected: true
     }
-  }
+  }, 
+  { 
+    path:"/reviews/:id", 
+    name: "ReviewView", 
+    component: () => import('../views/ReviewView.vue')
+  }, 
+  { 
+    path: "/schools/:school", 
+    name: "SchoolView", 
+    //component: () => import('../views/SchoolView.vue')
+  },
+  { 
+    path: "/schools/:school/:name", 
+    name: "ClassView", 
+    component: () => import('../views/ClassView.vue')
+  }    
 ]
 
 const router = new VueRouter({

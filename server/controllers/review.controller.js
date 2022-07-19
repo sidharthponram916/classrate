@@ -20,5 +20,15 @@ module.exports = {
         catch (e) { 
             res.status(500).json({"error": `${e.message}`})
         }
+    }, 
+    async getReview(req,res) { 
+        try { 
+           const review  = await Review.findById(req.params.id); 
+
+           res.status(200).json(review); 
+        }
+        catch (e) { 
+           res.status(500).json({ "error": `${e.message}`}); 
+        }
     }
 }

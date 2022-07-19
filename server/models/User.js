@@ -19,7 +19,11 @@ const userSchema = new Schema({
      }, 
      school: { 
         type: String, 
-        required: true, 
+        default: ""
+     },
+     graduatingClass: { 
+        type: String, 
+        default: ""
      },
      createdAt: { 
          type: Date, 

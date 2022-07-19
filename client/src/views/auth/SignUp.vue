@@ -10,13 +10,6 @@
               >
               <br>
               <input
-              v-model = 'user.school'
-              type = 'text'
-              placeholder = "Enter your school exactly how it is stated on Google."
-              class = 'border border-black w-11/12 rounded p-3 m-4 shadow-lg'
-              >
-              <br>
-              <input
               v-model = 'user.email'
               type = 'email'
               placeholder = "Enter your E-Mail"
@@ -51,6 +44,7 @@ export default {
                   email: this.user.email, 
                   password: this.user.password,
                   school: this.user.school, 
+                  graduatingClass: `${this.user.graduatingClass}`
               })
 
               this.$store.commit("logIn");

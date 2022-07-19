@@ -1,11 +1,11 @@
 <template>
-<ul class="flex items-center justify-between bg-blue-900 text-white p-3 w-full">
+<ul class="flex relative items-center justify-between bg-blue-900 text-white p-3 w-full">
      <li class = 'mr-6'> 
-         <a href = '/home' class = 'block align-middle text-2xl p-2'>📘 RateMyClass</a>  
+         <a href = '/home' class = 'block align-middle text-2xl p-2'>🎓 Edurate<span class = 'text-sm'>.org</span></a>  
      </li>
-     <li class = 'mr-6'> 
+    <li class = 'mr-6'> 
          <a href = '/write' class = 'block align-middle p-2'>Write a Review</a>  
-     </li> 
+     </li>
     <li class = 'ml-auto'> 
          <a href = '/signup' class = 'block align-middle bg-blue-600 hover:bg-blue-500 p-2 rounded'>Sign Up</a>  
      </li>       
@@ -21,6 +21,9 @@
 
 <script>
 export default {
+   components: { 
+       
+   },
    methods: { 
        async logOut() { 
              localStorage.removeItem("token"); 

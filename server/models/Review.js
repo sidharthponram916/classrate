@@ -25,17 +25,29 @@ const reviewSchema = new Schema({
         type: String, 
         default: "N/A"
     },
-    subjects: { 
+    category: { 
         type: String, 
         required: true
     }, 
+    year: { 
+        type: String, 
+        required: true
+    },
     desc: { 
         type: String, 
         required: true
     }, 
+    curriculum: { 
+        type: Number, 
+        required: true, 
+    },
     difficulty: { 
         type: Number, 
         required: true,
+    },
+    type: { 
+        type: String, 
+        required: true
     },
     workload: { 
         type: Number, 
@@ -49,9 +61,17 @@ const reviewSchema = new Schema({
         type: Number, 
         required: true
     },
+    upvotes: {
+        type: Number, 
+        default: 0
+    }, 
+    downvotes: {
+        type: Number, 
+        default: 0
+    }, 
     createdAt: { 
-        type: Date, 
-        default: new Date()
+        type: String, 
+        default: new Date().toLocaleDateString()
     }
 })
 

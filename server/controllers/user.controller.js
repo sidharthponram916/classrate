@@ -14,6 +14,7 @@ module.exports = {
                username: req.body.username, 
                email: req.body.email, 
                school: req.body.school,
+               graduatingClass: req.body.graduatingClass,
                password: hashedPwd
           })
 

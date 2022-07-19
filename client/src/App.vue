@@ -46,7 +46,7 @@ button:disabled {
 }
 
 body { 
-   background: rgb(177, 196, 225)
+   background: rgb(211, 230, 249)
 }
 
 #app {

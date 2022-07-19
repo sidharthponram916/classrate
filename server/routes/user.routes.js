@@ -3,7 +3,6 @@ const router = Router();
 
 const controller = require('../controllers/user.controller'); 
 
-
 router.post('/create', controller.createUser); 
 router.post('/login', controller.logIn); 
 router.get('/all', controller.getAllData); 
