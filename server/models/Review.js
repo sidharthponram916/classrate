@@ -12,11 +12,15 @@ const reviewSchema = new Schema({
     course: { 
         type: String, 
         required: true
-    }, 
+    },
     school: { 
         type: String, 
         required: true
     }, 
+    school_id: { 
+        type: String,
+        required: true
+    },
     instructor: { 
         type: String, 
         default: "N/A"
@@ -61,18 +65,6 @@ const reviewSchema = new Schema({
         type: Number, 
         required: true
     },
-    upvotes: {
-        type: Number, 
-        default: 0
-    }, 
-    downvotes: {
-        type: Number, 
-        default: 0
-    }, 
-    createdAt: { 
-        type: String, 
-        default: new Date().toLocaleDateString()
-    }
 })
 
 module.exports = model('reviews', reviewSchema); 

@@ -3,8 +3,8 @@
   <!-- This code could be converted into a component....  --> 
   <SearchBar />
   <div class = 'bg-white text-black w-11/12 text-left m-5 border-2'>
-       <h1 class = 'p-2 mx-2 text-4xl my-1 text-left'>Review of <a :href = "'/schools/' + review.school.split(' ').join('-') + '/' + review.course.split(' ').join('_')">{{ review.course }}</a> in {{ review.school }} </h1>
-       <p class = 'px-2 mx-2'>Student at <span class = 'text-blue-700'>{{ review.school }}</span> on <span class = 'text-gray-600'>{{ review.createdAt }}</span></p>
+       <h1 class = 'p-2 mx-2 text-4xl my-1 text-left'>Review of {{ review.course }} at {{ review.school }} </h1>
+       <p class = 'px-2 mx-2'>Student at <span class = 'text-blue-700'><a :href = "'/schools/view/' + review.school_id">{{ review.school }}</a></span> on <span class = 'text-gray-600'>{{ review.createdAt }}</span></p>
        <p class = 'px-2 mx-2'>Class finished on <span class = 'text-blue-700'>{{ formatDate(review.year) }}</span> through {{ review.type.toLowerCase() }} instruction.</p>
        <h1 class = 'text-yellow-500 p-2 text-6xl'>{{ rating(review.overall)}}</h1>
         <span class = 'text-3xl p-2 m-2'>Instructor: <span class = 'text-gray-700 text-3xl'>{{ review.instructor }} </span></span>
@@ -20,7 +20,7 @@
           <p class = 'text-xl text-gray-600'> {{ review.desc }} </p>
         </div>
 
-        <button class = 'p-3 m-4 bg-green-500 mr-auto rounded text-white shadow-lg text-2xl'>Share 👥</button>
+        <button @click = "clicked()" v-clipboard:copy = "message" class = 'p-3 m-4 bg-green-500 mr-auto rounded text-white shadow-lg text-2xl'>Share 👥</button>
         <button class = 'p-3 m-4 bg-yellow-600 mr-auto rounded text-white shadow-lg text-2xl'>Upvote 👍</button>
 
   </div>
@@ -41,9 +41,11 @@
 </div>
 </div>
 </div>
+
 </template>
 
 <script>
+
 import SearchBar from '../components/Searchbar.vue';
 export default {
      components: { 
@@ -54,6 +56,7 @@ export default {
              review: { 
 
              }, 
+             schoolName: "",
             color: { 
                 workload: "text-black", 
                 instructorRating: "text-black", 
@@ -62,7 +65,8 @@ export default {
             }, 
             data: "", 
             all: "", 
-            search: ""
+            search: "", 
+            message: "heloo"
          }
      }, 
      computed: { 
@@ -76,20 +80,27 @@ export default {
                   }
               }
 
-              shuffle(data); 
-              console.log(data); 
+              shuffle(data);
               return data.slice(1,6); 
           }, 
      },
      async mounted() { 
+          console.log(this.$route)
          let { data } = await this.$http.get(`/reviews/get/${this.$route.params.id}`);
          let all = await this.$http.get(`/reviews/all`);
 
          this.review = data ; 
          this.all = all.data; 
 
+          const school = await this.$http.get(`/schools/get/${data.school_id}`); 
 
-         this.data = data; 
+             this.schoolName = school.data.name; 
+
+         this.message = `Check out this review of ${this.review.course} at ${school.data.name}. \n
+${localStorage.getItem('baseUrl')}${this.$route.fullPath} `
+
+            this.data = data; 
+
            if (this.data.difficulty == 10) { 
                  this.color.difficulty = "text-red-500"; 
             }
@@ -268,6 +279,9 @@ export default {
                          var another = months[+dte.split('-')[1] - 1]
 
                          return `${another} ${dte.split('-')[0]}`; 
+         }, 
+         clicked() { 
+           alert("Information copied to clipboard!")
          }
      }
 }

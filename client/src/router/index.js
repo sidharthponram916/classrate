@@ -42,15 +42,25 @@ const routes = [
     component: () => import('../views/ReviewView.vue')
   }, 
   { 
-    path: "/schools/:school", 
-    name: "SchoolView", 
-    //component: () => import('../views/SchoolView.vue')
+    path: "/schools/add", 
+    name: "AddSchool", 
+    component: () => import('../views/school/AddSchool.vue')
   },
   { 
-    path: "/schools/:school/:name", 
-    name: "ClassView", 
-    component: () => import('../views/ClassView.vue')
-  }    
+    path: "/schools/view/:id", 
+    name: "SchoolView", 
+    component: () => import('../views/school/SchoolView.vue')
+  }, 
+  { 
+    path: "/schools/edit/:id", 
+    name: "SchoolView", 
+    component: () => import('../views/school/EditSchool.vue')
+  }, 
+  { 
+    path: '/courses/view/:id', 
+    name: "CourseView", 
+    component: () => import('../views/course/CourseView.vue')
+  }
 ]
 
 const router = new VueRouter({

@@ -9,23 +9,72 @@
           <div class = 'text-left m-auto bg-white w-5/6'> 
                <form class = 'm-2 p-2 text-xl'>
                 <div class = 'p-2' v-if = 'page1'> 
-                    <label class = 'text-left'>What is the name of the class? (Exactly how it says in your schedule)</label>
+                    <label class = 'text-left'>Is the class an AP class?</label>
+                    <br>
+                     <select :class = 'style.input' v-model = "ap"> 
+                         <option value = 'Yes'>Yes</option>
+                         <option value = 'No'>No</option>
+                     </select>
+                     <br>
+                    <label  v-if = "ap == 'No'" class = 'text-left'>What is the name of the class? <br><span class = 'text-sm'> (Exactly as stated in your school course catalog, to ensure proper grouping. ) </span> </label>
+                    <label  v-if = "ap == 'Yes'" class = 'text-left'>Choose the AP that you are enrolled in.</label>
                     <br>
                     <input
                       type = 'text'
+                      v-if = "ap === 'No'"
                       v-model = "data.course"
                       placeholder = 'Course Name'
                       :class = "style.input"
                     >
+                    <select v-else :class = 'style.input' v-model = "data.course"> 
+                         <option value = "AP Art History"> AP Art History </option>
+                         <option value = "AP Biology"> AP Biology </option>
+                         <option value = "AP Calculus AB"> AP Calculus AB </option>
+                         <option value = "AP Calculus BC"> AP Calculus BC </option>
+                         <option value = 'AP Chemistry'>AP Chemistry</option> 
+                         <option value = 'AP Chinese Language & Culture'>AP Chinese Language & Culture</option>
+                         <option value = 'AP Comparative Government & Politics'>AP Comparative Government & Politics</option>
+                         <option value = 'AP Computer Science A'>AP Computer Science A</option>
+                         <option value = 'AP Computer Science Principles'>AP Computer Science Principles</option>
+                         <option value = 'AP Language and Composition'>AP Language and Composition</option>
+                         <option value = 'AP Literature and Composition'>AP Literature and Composition</option>
+                         <option value = 'AP Environmental Science'>AP Environmental Science</option>
+                         <option value = 'AP European History'>AP European History</option>
+                         <option value = 'AP French'>AP French</option>
+                         <option value = 'AP German'>AP German</option>
+                         <option value = 'AP Human Geography'>AP Human Geography</option>
+                         <option value = 'AP Italian'>AP Italian</option>
+                         <option value = 'AP Latin'>AP Latin</option>
+                         <option value = 'AP Macroeconomics'>AP Macroeconomics</option>
+                         <option value = 'AP Microeconomics'>AP Microeconomics</option>
+                         <option value = 'AP Music Theory'>AP Music Theory</option>
+                         <option value = 'AP Physics 1'>AP Physics 1</option>
+                         <option value = 'AP Physics 2'>AP Physics 2</option>
+                         <option value = 'AP Physics C: E&T'>AP Physics C: E&T</option>
+                         <option value = 'AP Physics C: M'>AP Physics C: Mechanics</option>
+                         <option value = 'AP Research'>AP Research</option>
+                         <option value = 'AP Seminar'>AP Seminar</option>
+                         <option value = 'AP Spanish Language'>AP Spanish Language</option>
+                         <option value = 'AP Spanish Literature'>AP Spanish Literature</option>
+                         <option value = 'AP Statistics'>AP Statistics</option>
+                         <option value = 'AP Studio Art 2D'>AP Studio Art 2D</option>
+                         <option value = 'AP Studio Art 3D'>AP Studio Art 3D</option>
+                         <option value = 'AP Studio Art Drawing'>AP Studio Art Drawing</option>
+                         <option value = 'AP US History'>AP US History</option>
+                         <option value = 'AP US Government and Politics'>AP US Government and Politics</option>
+                         <option value = 'AP World History'>AP World History</option>
+                     </select>
                     <br>
-                    <label class = 'text-left'>At what school did you take this class? (Type exactly how it says on Google). </label>
+                    <label class = 'text-left'>At what school did you take this class? <br> <span class = 'text-sm'> (Can't find your school? Click <a href = "/schools/add" class = 'underline text-blue-500' target = "_blank"> here </a> to add your school.) </span> </label>
                     <br>
-                    <input
-                      type = 'text'
-                      v-model = "data.school"
-                      placeholder = 'School Name'
-                      :class = "style.input"
-                    >
+                    <select :class = "style.input" v-model = "data.school"> 
+                    
+                         <option  :style = "'color:' + school.color" class = 'bg-white' v-for = "school in schools" :key = "school._id" :value = "school">
+                              <div class = 'flex p-3 cursor-pointer border'>
+                                    <h1 class = 'text-left mr-2'><span> {{ school.name }} </span> - <br> <h1 class = 'mr-2 text-gray-400'>{{ school.city }}, {{ school.state }}</h1></h1>
+                              </div>
+                         </option>
+                    </select> 
                     <br>
                     <label class = 'text-left'>At what date did you finish/will you finish the class? </label>
                     <br>
@@ -46,12 +95,12 @@
                         <option value = "STEM">Technology/Engineering</option>
                     </select>
                     <br>
-                     <label class = 'text-left'>If possible, could you write the name of your instructor? (Optional)</label>
+                     <label class = 'text-left'>If possible, could you write the name of your instructor in firstName LastName format? (Optional)</label>
                     <br>
                     <input
                       type = 'text'
                       v-model = "data.instructor"
-                      placeholder = 'Enter subjects, separated by a comma and a space.'
+                      placeholder = 'Enter your Instructor..'
                       :class = "style.input"
                     >
                     <br> 
@@ -153,7 +202,7 @@
                     <h1 class = 'text-4xl text-center text-white mb-4'>Confirm Your Rating 📝</h1>
                     <div class = 'w-auto p-5 bg-blue-100 text-black md:w-1/3 m-auto '> 
                         <h1 class = "text-3xl"> {{ data.course }} </h1>
-                        <p class = 'text-sm'>Someone from {{ data.school }}</p>
+                        <p class = 'text-sm'>Someone from {{ data.school.name }}</p>
                         <p class = 'text-3xl mt-2'>Overall Rating<br><span class = 'text-4xl text-yellow-500'>{{ rating }}</span></p>
                       <div class = 'flex grid grid-cols-2'>
                         <span class = 'text-md mt-2 mr-5'>Difficulty<br><span :class = 'color.difficulty' class = 'text-5xl'>{{ data.difficulty }}</span>/10</span>
@@ -177,16 +226,26 @@
                 </div>
                </form>
           </div>
+          <FlashMessage> </FlashMessage>
    </div>
 </template>
 
 <script>
 export default { 
+     async mounted()  { 
+         let { data } = await this.$http.get('/schools/all'); 
+
+         data.sort((a, b) => a.name.localeCompare(b.name)); 
+
+         this.schools = data; 
+     },
      data() { 
         return { 
+            schools: [], 
             style: { 
                 input: "p-2 mt-2 mb-2 w-11/12 text-xl bg-gray-200 rounded focus:outline-none"
             }, 
+            ap: "No",
             data: { 
                  overall: 3, 
                  workload: 5, 
@@ -200,6 +259,7 @@ export default {
                  course: "",
                  school: ""
             }, 
+            school_results: [],
             page1: true,
             page2: false,
             page3: false, 
@@ -223,7 +283,7 @@ export default {
          disablePage1() { 
             let { data } = this; 
 
-            if (data.category.trim("") == "" || data.school.trim("") == "" || data.course.trim("") == "" || data.desc.trim("") == "" || (data.desc.length < 175)) { 
+            if (data.category.trim("") == "" || data.course.trim("") == "" || data.desc.trim("") == "" || (data.desc.length < 175)) { 
                  return true; 
             }
             else { 
@@ -396,13 +456,16 @@ export default {
 
          }, 
          async submit() { 
-          try { 
-              let review = await this.$http.post(`/reviews/create`, { 
+          try {
+           
+              let rating = await this.$http.post(`/reviews/create`, { 
                   username: this.$store.state.userData.username, 
                   user_id: this.$store.state.userData._id, 
                   course: this.data.course, 
+                  level: this.data.level,
                   grade: this.data.grade,
-                  school: this.data.school, 
+                  school: this.data.school.name,
+                  school_id: this.data.school._id,
                   category: this.data.category,
                   instructor: this.data.instructor, 
                   desc: this.data.desc, 
@@ -415,9 +478,30 @@ export default {
                   overall: this.data.overall
               })
 
-             location.replace('/home'); 
-              
-             alert("Your review has been submitted.", review); 
+          let { data } = await this.$http.get(`/courses/get/${this.data.school}/${this.data.course}`);
+           let course = data; 
+
+           console.log(course); 
+
+           if (!course) { 
+              let newData = await this.$http.post('/courses/create', { 
+                    school_id: this.data.school._id, 
+                    name: this.data.course, 
+                    level: this.data.level,
+                    category: this.data.category, 
+                })
+                course = newData.data; 
+           }
+
+               course.ratings.push(rating); 
+
+               await this.$http.put(`/courses/update/${course._id}`, course); 
+
+                           
+             this.flashMessage.success({title: 'Review Submitted Successfully!', message: 'Thank you for contributing to EduRate!'});
+
+
+             location.replace("/home"); 
               
          }     
           catch (e) { 

@@ -4,17 +4,29 @@
         <input 
         type = 'text'
         v-model = 'search'
-        @keyup = "filterReviews()"
+        @keyup = "filterData()"
         class = 'mr-auto w-full p-3 text-xl focus:outline-none'
         placeholder = 'Enter a course, school, review, etc...'
         >
         <div v-if = "search.trim('') != ''" class = 'max-h-72 overflow-y-auto'> 
            <div v-for = "review in results" :key = "review._id" class = "w-full">
-               <div class = 'flex bg-gray-100 p-3 cursor-pointer border'>
+               <a :href = "'/reviews/' + review._id">
+                  <div class = 'flex bg-gray-100 p-3 cursor-pointer border'>
                     <img src = 'https://icon-library.com/images/subject-icon/subject-icon-5.jpg' class = 'w-12 rounded-full mr-3'>
-                    <h1 class = 'text-left mr-2'>{{ review.course }} Rating <br> <h1 class = 'mr-2 text-gray-600'>{{ review.school }}</h1></h1>
-               </div>
+                    <h1 class = 'text-left mr-2'>{{ review.course }} <br> <h1 class = 'mr-2 text-gray-600'>Rating at {{ review.school }}</h1></h1>
+                  </div>
+               </a>
            </div>
+
+           <div v-for = "school in schoolResults" :key = "school._id" class = "w-full">
+               <a :href = "'/schools/view/' + school._id">
+                  <div class = 'flex bg-gray-100 p-3 cursor-pointer border'>
+                    <img :src = 'school.url' class = 'w-12 rounded-full mr-3'>
+                    <h1 class = 'text-left mr-2'>{{ school.name }} <br> <h1 class = 'mr-2 text-gray-600'>{{ school.city }}, {{ school.state }}</h1></h1>
+                  </div>
+               </a>
+           </div>
+
            <div class = 'bg-gray-300 p-2 text-left'> 
                  Can't find what you're looking for? Add it <u class = 'text-blue-500'>here</u>!
            </div>
@@ -32,18 +44,27 @@ export default {
     data() { 
         return { 
            reviews: [],
+           schools: [],
            search: "", 
-           results: []
+           results: [], 
+           schoolResults: []
         }
     }, 
     async mounted() { 
          let { data } = await this.$http.get('/reviews/all'); 
          this.reviews = data.reverse(); 
+
+         let schools = await this.$http.get('/schools/all'); 
+         this.schools = schools.data; 
     },
     methods: { 
-         filterReviews() { 
+         filterData() { 
            let { reviews } = this; 
+           let { schools } = this; 
+
            let results = []; 
+           let schoolResults = []; 
+
             for (let i = 0; i < reviews.length; i++) { 
                  let temp = reviews[i]; 
 
@@ -51,8 +72,19 @@ export default {
                       results.push(temp); 
                  }
             }
+            console.log(results); 
             this.results = results; 
-        }
+
+            for (let i = 0; i < schools.length; i++) { 
+                 let temp = schools[i]; 
+              if (temp.name.toLowerCase().startsWith(`${this.search.toLowerCase().trim('')}`)) { 
+                      schoolResults.push(temp); 
+                 }
+
+            }
+            console.log(schoolResults); 
+            this.schoolResults = schoolResults; 
+        }, 
     }
 }
 </script>

@@ -1,11 +1,18 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
+import FlashMessage from '@smartweb/vue-flash-message'
+import VueClipboard from "vue-clipboard2"; 
 import store from './store'; 
 import http from './http'; 
 
-Vue.config.productionTip = false
-Vue.prototype.$http = http;   
+Vue.use(FlashMessage); 
+Vue.use(VueClipboard); 
+
+Vue.config.productionTip = false 
+Vue.prototype.$http = http;  
+
+localStorage.setItem("baseUrl", "http://localhost:8080")
 
  if (localStorage.getItem('token')) { 
   store.commit("logIn");

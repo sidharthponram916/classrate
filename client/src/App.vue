@@ -37,12 +37,12 @@ button:disabled {
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #888;
+  background: rgb(198, 192, 192);
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  background: rgb(0, 0, 0);
 }
 
 body { 

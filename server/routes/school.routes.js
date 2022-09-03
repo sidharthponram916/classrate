@@ -10,5 +10,7 @@ router.get('/get/:id', schoolController.getSchool);
 router.use(require('../middleware/verify')); 
 
 router.post('/create', schoolController.createSchool); 
+router.put('/update/:id', schoolController.updateSchool); 
+router.delete('/delete/:id', schoolController.deleteSchool); 
 
-module.exports = router; 
+module.exports = router;   

@@ -3,9 +3,9 @@ const School = require('../models/School.js');
 module.exports = { 
      async createSchool(req,res) { 
         try{ 
-         const school = await School.create(req.body); 
+          const school = await School.create(req.body); 
 
-         res.status(200).json(school); 
+          res.status(200).json(school); 
         }
         catch (e) { 
             res.status(500).json({ "error": `${e.message}`})
@@ -27,6 +27,25 @@ module.exports = {
         }
         catch (e) { 
             res.status(500).json({"error": e.message}); 
+        }
+     }, 
+     async updateSchool(req, res) { 
+        try { 
+           const school = await School.findByIdAndUpdate(req.params.id, req.body); 
+           res.status(200).json(school); 
+        }
+        catch (e) { 
+            res.status(500).json({ "error": e.message}); 
+        }
+     }, 
+     // Moderator Action Only!!!
+     async deleteSchool(req, res) { 
+        try { 
+         const school = await School.findByIdAndDelete(req.params.id); 
+         res.status(200).json({"message": "Successful Delete!"}); 
+        }
+        catch (e) { 
+            res.status(500).json({ "error": e.message});
         }
      }
 }
