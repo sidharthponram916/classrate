@@ -1,7 +1,7 @@
 <template>
 <div> 
     <div class = 'w-full p-2 m-auto rounded'>
-         <div class = 'my-4 mx-20 text-left text-black border-2 bg-green-100 p-3'>
+         <div class = 'my-4 mx-20 text-left text-black border-2 bg-blue-200 p-3'>
            <h1 class = 'text-4xl p-4'> Welcome, {{ this.$store.state.userData.username }} 👋</h1>
            <p class = 'mx-4 mb-2'>This is your Discover page. Here you can discover recent posts, categories, and much more!</p>
            <Searchbar styling = "rounded" />
@@ -16,7 +16,7 @@
                <div :style = "'background:' + school(review.school_id).color" class = 'relative text-left p-3 bg-blue-500 text-white w-96 shadow-lg mr-auto md:mr-3 rounded'>
                     <h1 class = 'text-2xl'>{{ review.course }}</h1>
                     <h1 class = 'text-sm mb-1'>Someone from <a :href = "'/schools/view/' + review.school_id">{{ review.school }}</a></h1>
-                    <h1 class = 'text-md text-gray-200'>{{ review.createdAt  }}</h1>
+                    <h1 class = 'text-md text-gray-200'>{{ review.createdAt }}</h1>
                    <h1 class = 'my-1 mr-1 text-5xl text-yellow-500'>{{ rating(review.overall)}}</h1>
                    <p class = 'rounded p-1 mb-7'>{{ review.desc.slice(0,250)}} <br></p>
                      
@@ -33,11 +33,11 @@
                <span class = 'text-8xl'>🎓</span>
            </div>
            <div class = 'p-4 m-2 bg-blue-500 text-white text-center  rounded border-6 border-black shadow-lg'>
-               <div class = 'text-2xl mb-5 text-center'>Write a Teacher Review</div>
+               <div class = 'text-2xl mb-5 text-center'>View Course/Teacher Data</div>
                <span class = 'text-7xl'>👩‍🏫</span>
            </div>
            <div class = 'p-4 m-2 bg-blue-600 text-white text-center  rounded border-6 border-black shadow-lg'>
-               <div class = 'text-2xl mb-5 text-center'>View Class/Course Data</div>
+               <div class = 'text-2xl mb-5 text-center'>View Class Reviews</div>
                <span class = 'text-7xl'>📚</span>
            </div>
            <div class = 'p-4 m-2 bg-blue-700  text-white text-center  rounded border-6 border-black shadow-lg'>

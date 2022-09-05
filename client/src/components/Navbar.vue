@@ -6,6 +6,9 @@
     <li class = 'mr-6'> 
          <a href = '/write' class = 'block align-middle p-2'>Write a Review</a>  
      </li>
+     <li class = 'mr-6'> 
+         <a target = "_blank" href = 'https://docs.google.com/forms/d/e/1FAIpQLSclD029c9Ntt7BNoQ4ZYTRRBj-q1YKvHZqub6kkAEOY_Vr6Zg/viewform?usp=sf_link' class = 'block align-middle p-2'>Send Feedback</a>  
+     </li>
     <li v-if = "$store.state.loggedIn === false" class = 'ml-auto'> 
          <a href = '/signup' class = 'block align-middle bg-blue-600 hover:bg-blue-500 p-2 rounded'>Sign Up</a>  
      </li>       

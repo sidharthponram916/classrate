@@ -40,7 +40,7 @@
        <div class = 'flex grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 overflow-x-auto text-black'>
          <div class = 'p-2 m-2 border-2 rounded' v-for = "review in reviews" :key = "review._id"> 
            <h1 class = 'text-xl'>{{ review.course }}</h1>
-           <h1 class = 'text-sm'>{{ review.year }}</h1>
+           <h1 class = 'text-sm'>{{ review.school }}</h1>
            <button class = 'my-2 bg-blue-600 p-2 rounded text-white mr-2'><a :href = "'/reviews/' + review._id"> View </a></button>
            <button @click = "deleteReview(review._id)" class = 'my-2 bg-red-600 p-2 rounded text-white'>Delete</button>
          </div>
@@ -114,7 +114,7 @@ export default {
     
 
 
-              //   location.reload()
+               location.reload()
              }
              catch (e) { 
                 alert("An error has occured when deleting!")

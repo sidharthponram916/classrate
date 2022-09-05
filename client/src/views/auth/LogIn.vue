@@ -1,7 +1,7 @@
 <template>
    <div class='lg:flex'>
     <form @submit.prevent="login" class='bg-blue-800 p-5 float-right w-full lg:w-1/2 text-white'>
-      <h1 class='font-bold text-4xl mb-20 m-2 text-center text-6xl text-white '>Log into EduRate</h1>
+      <h1 class='font-bold text-4xl m-2 text-center text-6xl text-white mt-20'>Log into EduRate</h1>
       <br>
       <h1 class = 'text-white text-3xl text-center'>Username</h1>
       <input
@@ -25,7 +25,7 @@
     </form>
 
     <div style = "background:url('https://www.iesabroad.org/files/styles/news__1170x600_/public/default_featured_image_121.jpg?itok=kKD_IRsf');background-size:cover" class='bg-green-200 float-left w-3/2 flex-1 h-screen hidden lg:block'>
-   
+           <h1 class = 'text-white text-8xl text-center mt-56'>Welcome back!</h1>
     </div>
   </div>
 </template>

@@ -65,7 +65,10 @@ const routes = [
   { 
     path: "/schools/edit/:id", 
     name: "SchoolView", 
-    component: () => import('../views/school/EditSchool.vue')
+    component: () => import('../views/school/EditSchool.vue'), 
+    meta: { 
+      authProtected: true
+    }
   }, 
   { 
     path: '/courses/view/:id', 

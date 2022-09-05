@@ -1,8 +1,9 @@
 <template>
-  <div id="app">
+  <div id="app" class = 'flex flex-col min-h-screen'>
       <Navbar /> 
       <router-view /> 
 
+  <div class = 'mt-auto text-center p-4 text-black'>ⓒ Edurate 9/5/22, An Educational Organization</div> 
   </div>
 </template>
 <script> 

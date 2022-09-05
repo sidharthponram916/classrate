@@ -9,14 +9,16 @@
         placeholder = 'Enter a course, school, review, etc...'
         >
         <div v-if = "search.trim('') != ''" class = 'max-h-72 overflow-y-auto'> 
-           <div v-for = "review in results" :key = "review._id" class = "w-full">
-               <a :href = "'/reviews/' + review._id">
+
+           <div v-for = "course in courseResults" :key = "course._id" class = "w-full">
+               <a :href = "'/courses/view/' + course._id">
                   <div class = 'flex bg-gray-100 p-3 cursor-pointer border'>
-                    <img src = 'https://icon-library.com/images/subject-icon/subject-icon-5.jpg' class = 'w-12 rounded-full mr-3'>
-                    <h1 class = 'text-left mr-2'>{{ review.course }} <br> <h1 class = 'mr-2 text-gray-600'>Rating at {{ review.school }}</h1></h1>
+                    <img :src = "schoolData(course.school_id).url" class = 'w-12 rounded-full mr-3'>
+                    <h1 class = 'text-left mr-2'>{{ course.name }} <br> <h1 class = 'mr-2 text-gray-600'>{{ schoolData(course.school_id).name }}</h1></h1>
                   </div>
                </a>
            </div>
+
 
            <div v-for = "school in schoolResults" :key = "school._id" class = "w-full">
                <a :href = "'/schools/view/' + school._id">
@@ -27,6 +29,15 @@
                </a>
            </div>
 
+       <!--    <div v-for = "review in results" :key = "review._id" class = "w-full">
+               <a :href = "'/reviews/' + review._id">
+                  <div class = 'flex bg-gray-100 p-3 cursor-pointer border'>
+                    <img src = 'https://icon-library.com/images/subject-icon/subject-icon-5.jpg' class = 'w-12 rounded-full mr-3'>
+                    <h1 class = 'text-left mr-2'>{{ review.course }} <br> <h1 class = 'mr-2 text-gray-600'>Rating at {{ review.school }}</h1></h1>
+                  </div>
+               </a>
+           </div>
+-->
            <div class = 'bg-gray-300 p-2 text-left'> 
                  Can't find what you're looking for? Add it <u class = 'text-blue-500'>here</u>!
            </div>
@@ -45,9 +56,11 @@ export default {
         return { 
            reviews: [],
            schools: [],
+           courses: [],
            search: "", 
            results: [], 
-           schoolResults: []
+           schoolResults: [], 
+           courseResults: []
         }
     }, 
     async mounted() { 
@@ -56,14 +69,19 @@ export default {
 
          let schools = await this.$http.get('/schools/all'); 
          this.schools = schools.data; 
+
+         let courses = await this.$http.get('/courses/all'); 
+         this.courses = courses.data; 
     },
     methods: { 
          filterData() { 
            let { reviews } = this; 
            let { schools } = this; 
+           let { courses } = this; 
 
            let results = []; 
            let schoolResults = []; 
+           let courseResults = []; 
 
             for (let i = 0; i < reviews.length; i++) { 
                  let temp = reviews[i]; 
@@ -72,7 +90,6 @@ export default {
                       results.push(temp); 
                  }
             }
-            console.log(results); 
             this.results = results; 
 
             for (let i = 0; i < schools.length; i++) { 
@@ -82,9 +99,25 @@ export default {
                  }
 
             }
-            console.log(schoolResults); 
             this.schoolResults = schoolResults; 
+
+
+            for (let i = 0; i < courses.length; i++) { 
+                 let temp = courses[i]; 
+
+                 if (temp.name.toLowerCase().startsWith(`${this.search.toLowerCase().trim('')}`)) { 
+                      courseResults.push(temp); 
+                 }
+            }
+            this.courseResults = courseResults; 
         }, 
+        schoolData(id) { 
+            let school = this.schools.find(school => { 
+                 return school._id === id; 
+            })
+
+            return school; 
+        }
     }
 }
 </script>

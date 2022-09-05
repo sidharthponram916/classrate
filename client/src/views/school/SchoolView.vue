@@ -14,9 +14,8 @@
                    <h1 class = 'text-left mx-4 text-xl mb-4 '><a class = 'underline text-blue-300' target = "_blank" :href = "school.website"> {{ school.website }} </a></h1>
                </div>
             <div class = 'flex'> 
-              <span class = 'text-left text-gray-200 mx-4 text-xl mb-4 '><span class = 'text-4xl text-white'>{{ courseCount }}</span> Registered Classes</span>
               <span class = 'text-left text-gray-200 mx-4 text-xl mb-4 '><span class = 'text-4xl text-white'>{{ reviewCount }}</span> Class Reviews</span>
-            </div>
+              <span class = 'text-left text-gray-200 mx-4 text-xl mb-4 '><span class = 'text-4xl text-white'>{{ courseCount }}</span> Registered Classes</span>            </div>
            </div>
            <div class = 'w-11/12 mx-5 p-2 bg-white border text-black'> 
                       <h1 class = 'text-4xl text-left p-2 m-2'>Statistics</h1>

@@ -10,7 +10,7 @@
                 <h1 class = 'text-left ml-auto'><a :href = "'/schools/edit/' + school._id"> Edit Information ✏️</a></h1>
                </div>
             <div class = 'flex'>               
-               <h1 class = 'text-left text-gray-200 mx-4 text-xl mb-4 '><span class = 'text-4xl text-white'>{{ averages.rating.toFixed(1) }}</span>/5</h1>
+               <h1 class = 'text-left text-gray-200 mx-4 text-xl mb-4 '><span class = 'text-4xl text-white'>{{ averages.rating.toFixed(1) }}</span> Out of 5</h1>
               <h1 class = 'text-left text-gray-200 mx-4 text-xl mb-4 '><span class = 'text-4xl text-white'>{{ course.ratings.length }}</span> Ratings</h1>
             </div>
        </div>
@@ -26,7 +26,7 @@
                         <div class = 'flex-none' v-for = "teacher in teachers" :key = "teacher">
                             <div class = 'p-2 rounded border-2 m-2 text-left inline-block w-auto bg-gray-100'>
                                 <a :href = "'/courses/view/' + course._id">
-                                  <h1 class = 'text-2xl mb-2'> {{ teacher.name }} <span :class = "color.curriculum" class = 'text-sm p-2 m-2 text-3xl rounded'>{{ teacher.average }}<span class = 'text-black text-xl'>/10</span></span></h1>                              
+                                  <h1 class = 'text-2xl mb-2'> {{ teacher.name }} <span :class = "teacher.color" class = 'text-sm p-2 m-2 text-3xl rounded'>{{ teacher.average.toFixed(0) }}<span class = 'text-black text-xl'>/10</span></span></h1>                              
                                   <h1 class = 'text-sm'>{{ teacher.ratings.length }} Ratings</h1>
                                 </a>
                             </div> 
@@ -250,6 +250,7 @@ export default {
             else { 
                  this.color.curriculum = "text-green-600"; 
             }
+
           
             if (this.averages.workload == 10) { 
                  this.color.workload = "text-red-500"; 
@@ -328,6 +329,37 @@ export default {
                 console.log(`${teacher.name}: ${average}/10`)
                 
                 teachers[i].average = average; 
+
+                    if (average == 1) { 
+                        teachers[i].color = "text-red-500"; 
+                    }
+                    else if (average <= 2) { 
+                        teachers[i].color = "text-red-400"; 
+                    }
+                    else if (average <= 3) { 
+                        teachers[i].color = "text-yellow-700"; 
+                    }
+                    else if (average <= 4) { 
+                         teachers[i].color = "text-yellow-600"; 
+                    }
+                    else if (average <= 5) { 
+                         teachers[i].color= "text-yellow-500";
+                    }
+                    else if (average <= 6) { 
+                        teachers[i].color = "text-yellow-400";
+                    }
+                    else if (average <= 7) { 
+                        teachers[i].color = "text-green-500"; 
+                    }
+                    else if (average <= 8) { 
+                         teachers[i].color = "text-green-600"; 
+                    }
+                    else if (average <= 9) { 
+                         teachers[i].color = "text-green-600";
+                    }
+                    else { 
+                         teachers[i].color = "text-green-600"; 
+                    }
             }
 
             this.teachers = teachers; 
