@@ -16,7 +16,7 @@ module.exports = {
         try {  
             const course = await Course.findOne({ 
                  $and: [{
-                     school_id: req.params.school 
+                     school_id: req.params.school_id
                  }, { 
                      name: req.params.course
                  }]
@@ -56,6 +56,17 @@ module.exports = {
         }
         catch (e) { 
             res.status(500).json({ "error: ": `${e.message}`}); 
+        }
+    }, 
+    async deleteCourse(req,res) { 
+        try { 
+            const course = await Course.findByIdAndDelete(req.params.id); 
+
+            res.status(200).json(course);  
+        }
+        catch (e) { 
+            res.status(500).json({ "error: ": `${e.message}`}); 
+            console.log(e); 
         }
     }
 }

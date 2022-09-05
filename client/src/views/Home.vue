@@ -1,7 +1,7 @@
 <template>
 <div> 
     <div class = 'w-full p-2 m-auto rounded'>
-         <div class = 'my-4 mx-20 text-left text-white bg-indigo-800 p-3'>
+         <div class = 'my-4 mx-20 text-left text-black border-2 bg-green-100 p-3'>
            <h1 class = 'text-4xl p-4'> Welcome, {{ this.$store.state.userData.username }} 👋</h1>
            <p class = 'mx-4 mb-2'>This is your Discover page. Here you can discover recent posts, categories, and much more!</p>
            <Searchbar styling = "rounded" />

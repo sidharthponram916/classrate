@@ -36,6 +36,14 @@ const routes = [
       authProtected: true
     }
   }, 
+  {
+    path: "/view/profile", 
+    name: "Profile", 
+    component: () => import('../views/profile/MyProfile.vue'), 
+    meta: { 
+      authProtected: true
+    }
+  },
   { 
     path:"/reviews/:id", 
     name: "ReviewView", 
@@ -44,7 +52,10 @@ const routes = [
   { 
     path: "/schools/add", 
     name: "AddSchool", 
-    component: () => import('../views/school/AddSchool.vue')
+    component: () => import('../views/school/AddSchool.vue'), 
+    meta: { 
+      authProtected: true
+    }
   },
   { 
     path: "/schools/view/:id", 

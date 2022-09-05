@@ -21,6 +21,22 @@ module.exports = {
             res.status(404).json({ "error": e.message})
         }
      }, 
+     async getTeacher(req,res) { 
+        try { 
+            const teacher = await Teacher.findOne({ 
+                $and: [{
+                    name: req.params.name
+                }, { 
+                    school_id: req.params.school
+                }]
+           }); 
+
+            res.status(200).json(teacher);
+        }
+        catch (e) { 
+            res.status(404).json({ "error": e.message})
+        }
+     },
      async getTeacherById(req, res) { 
         try { 
             const teacher = await Teacher.findById(req.params.id)
@@ -31,6 +47,16 @@ module.exports = {
             res.status(404).json({ "error": e.message}); 
         }
      }, 
+     async updateTeacherById(req, res) { 
+         try { 
+            const teacher = await Teacher.findByIdAndUpdate(req.params.id, req.body); 
+
+            res.status(200).json(teacher); 
+         }
+         catch (e) { 
+            res.status(404).json({ "error": e.message});  
+         }
+     },
      async deleteTeacherById(req, res) { 
         try { 
             const teacher = await Teacher.findByIdAndDelete(req.params.id); 

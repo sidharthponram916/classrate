@@ -16,7 +16,7 @@
                          <option value = 'No'>No</option>
                      </select>
                      <br>
-                    <label  v-if = "ap == 'No'" class = 'text-left'>What is the name of the class? <br><span class = 'text-sm'> (Exactly as stated in your school course catalog, to ensure proper grouping. ) </span> </label>
+                    <label  v-if = "ap == 'No'" class = 'text-left'>What is the name of the class? <br><span class = 'text-sm'> (Before making a name for the class, please check your school page on the the site, and check if a name already exists. ) </span> </label>
                     <label  v-if = "ap == 'Yes'" class = 'text-left'>Choose the AP that you are enrolled in.</label>
                     <br>
                     <input
@@ -283,7 +283,7 @@ export default {
          disablePage1() { 
             let { data } = this; 
 
-            if (data.category.trim("") == "" || data.course.trim("") == "" || data.desc.trim("") == "" || (data.desc.length < 175)) { 
+            if (data.category.trim("") == "" || data.course.trim("") == ""  || data.desc.trim("") == "" || (data.desc.length < 175)) { 
                  return true; 
             }
             else { 
@@ -462,7 +462,6 @@ export default {
                   username: this.$store.state.userData.username, 
                   user_id: this.$store.state.userData._id, 
                   course: this.data.course, 
-                  level: this.data.level,
                   grade: this.data.grade,
                   school: this.data.school.name,
                   school_id: this.data.school._id,
@@ -478,10 +477,8 @@ export default {
                   overall: this.data.overall
               })
 
-          let { data } = await this.$http.get(`/courses/get/${this.data.school}/${this.data.course}`);
+          let { data } = await this.$http.get(`/courses/get/${this.data.school._id}/${this.data.course}`);
            let course = data; 
-
-           console.log(course); 
 
            if (!course) { 
               let newData = await this.$http.post('/courses/create', { 
@@ -493,9 +490,38 @@ export default {
                 course = newData.data; 
            }
 
-               course.ratings.push(rating); 
+          course.ratings.push(rating); 
 
-               await this.$http.put(`/courses/update/${course._id}`, course); 
+          await this.$http.put(`/courses/update/${course._id}`, course); 
+
+          let teacher = await this.$http.get(`/teachers/getbysan/${this.data.instructor}/${this.data.school._id}`)
+
+          console.log(teacher); 
+     
+          if (!teacher.data) {              
+               await this.$http.post('/teachers/create', { 
+                    name: this.data.instructor, 
+                    school: this.data.school.name, 
+                    school_id: this.data.school._id, 
+                    courses: [this.data.course], 
+                    ratings: [rating.data]
+               })
+          }
+          else { 
+               teacher.data.ratings.push(rating.data); 
+               
+               let course = teacher.data.courses.find(course => { 
+                      return this.data.course === course; 
+               })
+
+               if (!course) { 
+                    teacher.data.courses.push(this.data.course); 
+               }
+
+          }
+         if (teacher.data) { 
+          await this.$http.put(`/teachers/update/${teacher.data._id}`, teacher.data); 
+         }
 
                            
              this.flashMessage.success({title: 'Review Submitted Successfully!', message: 'Thank you for contributing to EduRate!'});

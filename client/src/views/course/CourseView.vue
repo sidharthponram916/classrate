@@ -5,28 +5,29 @@
             <div class = 'flex p-2 m-2 text-white'>
                  <img :src = "school.url" class = 'w-16 h-16 rounded-full mr-3'>
                   <h1 class = 'text-left text-4xl mr-4'>{{ course.name }} <span class = 'text-xl'>at {{ school.name }}</span><br> 
-                     <h1 class = 'text-xl'><span class = 'text-yellow-400 text-3xl'> {{ formatRating(averages.rating)}}</span></h1> 
+                     <h1 class = 'text-xl'><span class = 'text-yellow-400 text-3xl'> {{ formatRating(Math.round(averages.rating))}}</span></h1> 
                   </h1>
                 <h1 class = 'text-left ml-auto'><a :href = "'/schools/edit/' + school._id"> Edit Information ✏️</a></h1>
                </div>
-            <div class = 'flex'> 
+            <div class = 'flex'>               
+               <h1 class = 'text-left text-gray-200 mx-4 text-xl mb-4 '><span class = 'text-4xl text-white'>{{ averages.rating.toFixed(1) }}</span>/5</h1>
               <h1 class = 'text-left text-gray-200 mx-4 text-xl mb-4 '><span class = 'text-4xl text-white'>{{ course.ratings.length }}</span> Ratings</h1>
             </div>
        </div>
-       <div class = 'w-11/12 bg-white mx-5 p-2 text-black'>
-              <div class = 'flex p-2 m-2 text-left'>
+       <div class = 'w-11/12 bg-white mx-5 p-2 text-black mb-2'>
+              <div class = 'flex grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 p-2 m-2 text-left'>
                  <span class = 'text-3xl mt-2 mr-32' >Difficulty<br><span  class = 'text-8xl' :class = "color.difficulty">{{ averages.difficulty.toFixed(1) }}</span>/10</span>
                  <span class = 'text-3xl mt-2 mr-32' >Curriculum<br><span  class = 'text-8xl' :class = "color.curriculum">{{ averages.curriculum.toFixed(1) }}</span>/10</span>
                  <span class = 'text-3xl mt-2 mr-32 '>Workload <br><span class = 'text-8xl' :class = "color.workload">{{ averages.workload.toFixed(1) }}</span>/10</span>
-                 <span class = 'text-3xl mt-2 mr-32 '>Average GPA <br><span class = 'text-8xl'>{{ averages.grade.toFixed(2) }}</span>/4.00</span>
+                 <span class = 'text-3xl mt-2 mr-32 '>Average GPA <br><span class = 'text-8xl' :class = "color.grade">{{ averages.grade.toFixed(2) }}</span>/4.00</span>
              </div> 
               <h1 class = 'text-left p-2 m-2 text-3xl'>Teachers</h1>
                      <div class = 'flex mx-2 overflow-y-auto'>
                         <div class = 'flex-none' v-for = "teacher in teachers" :key = "teacher">
                             <div class = 'p-2 rounded border-2 m-2 text-left inline-block w-auto bg-gray-100'>
                                 <a :href = "'/courses/view/' + course._id">
-                                  <h1 class = 'text-2xl mb-2'> {{ teacher}} <span class = 'text-sm p-2 m-2 text-2xl text-yellow-700 rounded'> ★★★☆☆ </span></h1>                              
-                                  <h1 class = 'text-sm'>N/A Ratings</h1>  
+                                  <h1 class = 'text-2xl mb-2'> {{ teacher.name }} <span :class = "color.curriculum" class = 'text-sm p-2 m-2 text-3xl rounded'>{{ teacher.average }}<span class = 'text-black text-xl'>/10</span></span></h1>                              
+                                  <h1 class = 'text-sm'>{{ teacher.ratings.length }} Ratings</h1>
                                 </a>
                             </div> 
                         </div>
@@ -70,7 +71,10 @@ export default {
              }, 
              color: { 
 
-             }
+             }, 
+             teachers: [
+                1,2
+             ]
         }
     },
      async mounted() { 
@@ -84,7 +88,6 @@ export default {
 
          let difficulties = ratings.map(a => a.data.difficulty); 
          let findif = 0; 
-         console.log(difficulties)
         
          for (let i = 0; i < difficulties.length; i++) { 
               findif += difficulties[i]; 
@@ -132,7 +135,6 @@ export default {
                   findra = findra / stars.length; 
               }
          }
-
          this.averages.rating = findra
 
          let grades = ratings.map(a => a.data.grade); 
@@ -279,17 +281,56 @@ export default {
             else { 
                  this.color.workload = "text-green-800"; 
             }
-     }, 
-     computed: { 
-        teachers() { 
-             let { course } = this; 
 
-             let ratings = course.ratings; 
+            if (this.averages.grade >= 3.8) { 
+                this.color.grade = "text-green-800"
+            }
+            else if (this.averages.grade >= 3.0) { 
+                this.color.grade = "text-green-600"
+            }
+            else if (this.averages.grade >= 2.6) { 
+                this.color.grade = "text-yellow-500"
+            }
+            else if (this.averages.grade >= 2.2) { 
+                this.color.grade = "text-yellow-700"
+            }
+            else if (this.averages.grade >= 2.0) { 
+               this.color.grade = "text-red-500"
+            }
+            else { 
+               this.color.grade = "text-red-600"
+            }
 
-             let teachers = ratings.map(a => a.data.instructor); 
 
-             return teachers; 
-         }
+            let teachers = await this.$http.get('/teachers/all'); 
+            teachers = teachers.data; 
+
+            teachers = teachers.filter(teacher => { 
+                 return teacher.courses.includes(this.course.name)
+            })
+
+            for (let i = 0; i < teachers.length; i++) { 
+                let teacher = teachers[i]; 
+                let average = 0; 
+
+                for (let j = 0; j < teacher.ratings.length; j++) { 
+                    let rating = teacher.ratings[j]; 
+                    console.log(rating.instructorRating)
+
+                  average += rating.instructorRating; 
+
+                   if (j === (teacher.ratings.length - 1)) { 
+                         average = average / teacher.ratings.length
+                  }
+                }
+
+
+                console.log(`${teacher.name}: ${average}/10`)
+                
+                teachers[i].average = average; 
+            }
+
+            this.teachers = teachers; 
      }, 
      methods: { 
          formatRating(num) { 
@@ -304,6 +345,13 @@ export default {
 
               return rating; 
          },
+          formatDate(dte) { 
+          // Courtesy of StackOverflow for this solution (With Personal Edits for my prj): https://stackoverflow.com/questions/39195470/converting-yyyy-mm-in-string-format-to-a-month-name-var-javascript#:~:text=Use%20the%20split()%20function,by%20typing%20res%5B1%5D%20.
+                         var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+                         var another = months[+dte.split('-')[1] - 1]
+
+                         return `${another} ${dte.split('-')[0]}`; 
+         }, 
      }
 
 }

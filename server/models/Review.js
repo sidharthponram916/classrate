@@ -65,6 +65,10 @@ const reviewSchema = new Schema({
         type: Number, 
         required: true
     },
+    createdAt: { 
+        type: Date, 
+        default: new Date()
+    }
 })
 
 module.exports = model('reviews', reviewSchema); 

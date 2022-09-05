@@ -10,5 +10,5 @@ router.get('/get/:id', reviewController.getReview);
 router.use(require('../middleware/verify')); 
 
 router.post('/create', reviewController.createReview); 
-
+router.delete('/delete/:id', reviewController.deleteReview);
 module.exports = router; 

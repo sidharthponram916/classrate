@@ -9,6 +9,10 @@ const teacher_schema = new Schema({
           type: String, 
           required: true
      }, 
+     school_id: { 
+          type: String, 
+          required: true
+     },
      courses: { 
          type: Array, 
          default: []

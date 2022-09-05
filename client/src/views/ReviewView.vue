@@ -15,13 +15,13 @@
                  <span class = 'text-3xl mt-2 mr-32'>Instructor<br><span :class = 'color.instructorRating' class = 'text-8xl'> {{ review.instructorRating }}</span>/10</span>
         </div>
          <span class = 'text-3xl p-2 m-2'>Grade Recieved<br><span :class = 'color.grade' class = 'text-8xl p-2 m-2'> {{ review.grade }}</span></span>
-         <div class = 'p-2 m-2 w-full md:w-3/4'>
+         <div class = 'p-2 m-2 w-1/2 md:w-3/4'>
           <h1 class = 'text-3xl mb-2'> Review </h1>
-          <p class = 'text-xl text-gray-600'> {{ review.desc }} </p>
+          <p class = 'text-xl text-gray-600'>{{ review.desc }}</p>
         </div>
 
         <button @click = "clicked()" v-clipboard:copy = "message" class = 'p-3 m-4 bg-green-500 mr-auto rounded text-white shadow-lg text-2xl'>Share 👥</button>
-        <button class = 'p-3 m-4 bg-yellow-600 mr-auto rounded text-white shadow-lg text-2xl'>Upvote 👍</button>
+       <!-- <button class = 'p-3 m-4 bg-yellow-600 mr-auto rounded text-white shadow-lg text-2xl'>Upvote 👍</button> -->
 
   </div>
 
