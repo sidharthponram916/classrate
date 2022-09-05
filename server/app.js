@@ -24,6 +24,14 @@ app.use('/courses', require('./routes/course.routes.js'));
 app.use('/teachers', require('./routes/teacher.routes.js')); 
 app.use('/trs', require('./routes/tr.routes.js'));
 
+if (process.env.NODE_ENV === "production") { 
+     app.use(express.static(__dirname+"/dist/"))
+
+     app.get("*", (req,res) => { 
+           res.sendFile(__dirname+"/dist/index.html")
+     })
+}
+
 app.listen(process.env.PORT || 2022, () => { 
      console.log("ReviewMyCourse Server Up and Running!"); 
 })
