@@ -35,7 +35,7 @@
                     <h1 class = 'text-2xl text-left p-2 m-2'>Rankings</h1>
                     <p class = 'text-sm text-left mx-4 mb-4'>As more students review classes at this school, many more rankings will be available for access.</p>
                     <div v-if = "courses.length >= 5">
-                      <div class = 'p-4 flex grid grid-cols-2 gap-4'>
+                      <div class = 'p-4 flex grid grid-cols-1 md:grid-cols-2 gap-4'>
                           <div class = 'w-full bg-gray-100 border-2 p-2 mb-2 h-full'>
                               <h1 class = 'text-3xl text-left m-2'>Top Rated Classes</h1>
                               <p class = 'text-sm text-left m-2'>Ratings are calculated out of 5 out of all classes at the school.</p>
@@ -102,6 +102,9 @@ export default {
          let courses = all.data.filter(course => { 
               return course.school_id === `${this.$route.params.id}`
          }); 
+
+     // Sort the classes alphabetically
+         courses.sort((a, b) => a.name.localeCompare(b.name))
 
          this.courses = courses; 
          

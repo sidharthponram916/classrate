@@ -148,7 +148,6 @@ export default {
      }, 
      async mounted() { 
          let { data } = await this.$http.get('/schools/get/' + this.$route.params.id);
-         console.log(data);  
 
          this.data = data; 
      },
@@ -169,11 +168,10 @@ export default {
 
            location.replace("/schools/view/" + this.$route.params.id);
            
-           this.flashMessage.success({title: 'School Edited Successfully!', message: 'Thank you for contributing to EduRate!'});
+           this.flashMessage.success({title: 'School Edited Successfully!', message: 'Thank you for contributing to Classrate!'});
        }, 
        async revert() { 
-              let { data } = await this.$http.get('/schools/get/' + this.$route.params.id);
-         console.log(data);  
+        let { data } = await this.$http.get('/schools/get/' + this.$route.params.id);
 
          this.data = data; 
        }

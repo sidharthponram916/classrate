@@ -26,7 +26,7 @@
                         <div class = 'flex-none' v-for = "teacher in teachers" :key = "teacher">
                             <div class = 'p-2 rounded border-2 m-2 text-left inline-block w-auto bg-gray-100'>
                                 <a :href = "'/courses/view/' + course._id">
-                                  <h1 class = 'text-2xl mb-2'> {{ teacher.name }} <span :class = "teacher.color" class = 'text-sm p-2 m-2 text-3xl rounded'>{{ teacher.average.toFixed(0) }}<span class = 'text-black text-xl'>/10</span></span></h1>                              
+                                  <h1 class = 'text-2xl mb-2'> {{ teacher.name }} <span :class = "teacher.color" class = 'p-2 m-2 text-3xl rounded'>{{ teacher.average.toFixed(0) }}<span class = 'text-black text-xl'>/10</span></span></h1>                              
                                   <h1 class = 'text-sm'>{{ teacher.ratings.length }} Ratings</h1>
                                 </a>
                             </div> 
@@ -38,7 +38,7 @@
                         <div class = 'flex-none' v-for = "rating in course.ratings" :key = "rating.data._id">
                             <div class = 'rounded border-2 m-2 text-left inline-block w-auto'>
                                 <a :href = "'/reviews/' + rating.data._id">
-                                    <h1 class = 'text-2xl px-2 mx-2 my-2'>Student who had {{ rating.data.instructor }}</h1>
+                                    <h1 class = 'text-2xl px-2 mx-2 my-2'>Student who finished this class in {{ formatDate(rating.data.year) }} </h1>
                                     <h1 class = 'text-5xl p-2 text-yellow-600'>{{ formatRating(rating.data.overall) }}</h1>
                                     <h1 class = 'text-md px-2 mx-2 my-2'>{{ rating.data.desc.slice(0, 99)}}...</h1>
                                 </a>
@@ -189,62 +189,62 @@ export default {
 
          this.averages.grade = fingrades; 
 
-          if (this.averages.difficulty == 10) { 
+          if (this.averages.difficulty >= 10) { 
                  this.color.difficulty = "text-red-500"; 
             }
-            else if (this.averages.difficulty == 9) { 
+            else if (this.averages.difficulty >=  9) { 
                  this.color.difficulty = "text-red-400"; 
             }
-            else if (this.averages.difficulty == 8) { 
+            else if (this.averages.difficulty >=  8) { 
                  this.color.difficulty = "text-yellow-700"; 
             }
-            else if (this.averages.difficulty == 7) { 
+            else if (this.averages.difficulty >=   7) { 
                  this.color.difficulty = "text-yellow-600"; 
             }
-            else if (this.averages.difficulty == 6) { 
+            else if (this.averages.difficulty >=   6) { 
                  this.color.difficulty = "text-yellow-500";
             }
-            else if (this.averages.difficulty == 5) { 
+            else if (this.averages.difficulty >=   5) { 
                  this.color.difficulty = "text-green-400";
             }
-            else if (this.averages.difficulty == 4) { 
+            else if (this.averages.difficulty >=   4) { 
                  this.color.difficulty = "text-green-500"; 
             }
-            else if (this.averages.difficulty == 3) { 
+            else if (this.averages.difficulty >=   3) { 
                  this.color.difficulty = "text-green-600"; 
             }
-            else if (this.averages.difficulty == 2) { 
+            else if (this.averages.difficulty >=   2) { 
                  this.color.difficulty = "text-green-700";
             }
             else { 
                  this.color.difficulty = "text-green-800"; 
             }
 
-               if (this.averages.curriculum == 1) { 
+               if (this.averages.curriculum <=  1) { 
                  this.color.curriculum = "text-red-500"; 
             }
-            else if (this.averages.curriculum == 2) { 
+            else if (this.averages.curriculum <=  2) { 
                  this.color.curriculum = "text-red-400"; 
             }
-            else if (this.averages.curriculum == 3) { 
+            else if (this.averages.curriculum <=  3) { 
                  this.color.curriculum = "text-yellow-700"; 
             }
-            else if (this.averages.curriculum == 4) { 
+            else if (this.averages.curriculum <= 4) { 
                  this.color.curriculum = "text-yellow-600"; 
             }
-            else if (this.averages.curriculum == 5) { 
+            else if (this.averages.curriculum <=  5) { 
                  this.color.curriculum = "text-yellow-500";
             }
-            else if (this.averages.curriculum == 6) { 
+            else if (this.averages.curriculum <=  6) { 
                  this.color.curriculum = "text-yellow-400";
             }
-            else if (this.averages.curriculum == 7) { 
+            else if (this.averages.curriculum <=  7) { 
                  this.color.curriculum = "text-green-500"; 
             }
-            else if (this.averages.curriculum == 8) { 
+            else if (this.averages.curriculum <=  8) { 
                  this.color.curriculum = "text-green-600"; 
             }
-            else if (this.averages.curriculum == 9) { 
+            else if (this.averages.curriculum <=  9) { 
                  this.color.curriculum = "text-green-600";
             }
             else { 
@@ -252,31 +252,31 @@ export default {
             }
 
           
-            if (this.averages.workload == 10) { 
+            if (this.averages.workload >=   10) { 
                  this.color.workload = "text-red-500"; 
             }
-            else if (this.averages.workload == 9) { 
+            else if (this.averages.workload >=   9) { 
                  this.color.workload = "text-red-400"; 
             }
-            else if (this.averages.workload == 8) { 
+            else if (this.averages.workload >=   8) { 
                  this.color.workload = "text-yellow-700"; 
             }
-            else if (this.averages.workload == 7) { 
+            else if (this.averages.workload >=   7) { 
                  this.color.workload = "text-yellow-600"; 
             }
-            else if (this.averages.workload == 6) { 
+            else if (this.averages.workload >=   6) { 
                  this.color.workload = "text-yellow-500";
             }
-            else if (this.averages.workload == 5) { 
+            else if (this.averages.workload >= 5) { 
                  this.color.workload = "text-yellow-400";
             }
-            else if (this.averages.workload == 4) { 
+            else if (this.averages.workload >=   4) { 
                  this.color.workload = "text-green-500"; 
             }
-            else if (this.averages.workload == 3) { 
+            else if (this.averages.workload >=   3) { 
                  this.color.workload = "text-green-600"; 
             }
-            else if (this.averages.workload == 2) { 
+            else if (this.averages.workload >=   2) { 
                  this.color.workload = "text-green-700";
             }
             else { 
@@ -307,7 +307,7 @@ export default {
             teachers = teachers.data; 
 
             teachers = teachers.filter(teacher => { 
-                 return teacher.courses.includes(this.course.name)
+                 return teacher.courses.includes(this.course._id)
             })
 
             for (let i = 0; i < teachers.length; i++) { 
@@ -316,7 +316,6 @@ export default {
 
                 for (let j = 0; j < teacher.ratings.length; j++) { 
                     let rating = teacher.ratings[j]; 
-                    console.log(rating.instructorRating)
 
                   average += rating.instructorRating; 
 
@@ -326,7 +325,6 @@ export default {
                 }
 
 
-                console.log(`${teacher.name}: ${average}/10`)
                 
                 teachers[i].average = average; 
 

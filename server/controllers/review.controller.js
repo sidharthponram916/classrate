@@ -31,6 +31,16 @@ module.exports = {
            res.status(500).json({ "error": `${e.message}`}); 
         }
     }, 
+    async updateReview(req,res) { 
+         try { 
+             const review = await Review.findByIdAndUpdate(req.params.id, req.body); 
+
+             res.status(200).json(review)
+         }
+         catch (e) { 
+            res.status(500).json({ "error": `${e.message}`}); 
+         }
+    },
     async deleteReview(req,res) { 
         try { 
             const review  = await Review.findByIdAndDelete(req.params.id); 

@@ -74,6 +74,14 @@ const routes = [
     path: '/courses/view/:id', 
     name: "CourseView", 
     component: () => import('../views/course/CourseView.vue')
+  }, 
+  { 
+    path: '/tools/builder', 
+    name: "ClassBuilder", 
+    component: () => import('../views/tools/ClassBuilder.vue'), 
+    meta: { 
+       authProtected: true
+    }
   }
 ]
 

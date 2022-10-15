@@ -3,16 +3,22 @@ import App from './App.vue'
 import router from './router'
 import FlashMessage from '@smartweb/vue-flash-message'
 import VueClipboard from "vue-clipboard2"; 
+import animatenumber from 'animated-number-vue'; 
 import store from './store'; 
 import http from './http'; 
+import Ads from 'vue-google-adsense'
 
+
+Vue.use(require('vue-script2'))
+Vue.use(Ads.Adsense)
 Vue.use(FlashMessage); 
+Vue.use(animatenumber)
 Vue.use(VueClipboard); 
 
 Vue.config.productionTip = false 
 Vue.prototype.$http = http;  
 
-localStorage.setItem("baseUrl", "http://localhost:8080")
+localStorage.setItem("baseUrl", "https://www.classrate.ml")
 
  if (localStorage.getItem('token')) { 
   store.commit("logIn");

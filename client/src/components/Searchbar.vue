@@ -6,14 +6,14 @@
         v-model = 'search'
         @keyup = "filterData()"
         class = 'mr-auto w-full p-3 text-xl focus:outline-none'
-        placeholder = 'Enter a course, school, review, etc...'
+        placeholder = 'Enter a course, school, review, etc ✏️...'
         >
         <div v-if = "search.trim('') != ''" class = 'max-h-72 overflow-y-auto'> 
 
            <div v-for = "course in courseResults" :key = "course._id" class = "w-full">
                <a :href = "'/courses/view/' + course._id">
                   <div class = 'flex bg-gray-100 p-3 cursor-pointer border'>
-                    <img :src = "schoolData(course.school_id).url" class = 'w-12 rounded-full mr-3'>
+                    <img :src = "schoolData(course.school_id).url" class = 'w-12 h-12 rounded-full mr-3'>
                     <h1 class = 'text-left mr-2'>{{ course.name }} <br> <h1 class = 'mr-2 text-gray-600'>{{ schoolData(course.school_id).name }}</h1></h1>
                   </div>
                </a>
@@ -23,7 +23,7 @@
            <div v-for = "school in schoolResults" :key = "school._id" class = "w-full">
                <a :href = "'/schools/view/' + school._id">
                   <div class = 'flex bg-gray-100 p-3 cursor-pointer border'>
-                    <img :src = 'school.url' class = 'w-12 rounded-full mr-3'>
+                    <img :src = 'school.url' class = 'w-12 h-12 rounded-full mr-3'>
                     <h1 class = 'text-left mr-2'>{{ school.name }} <br> <h1 class = 'mr-2 text-gray-600'>{{ school.city }}, {{ school.state }}</h1></h1>
                   </div>
                </a>
@@ -39,7 +39,7 @@
            </div>
 -->
            <div class = 'bg-gray-300 p-2 text-left'> 
-                 Can't find what you're looking for? Add it <u class = 'text-blue-500'>here</u>!
+                 Can't find your school? Add it <a href = "/schools/add" class = 'underline'>here</a>
            </div>
         </div>
   </div>  
@@ -123,5 +123,9 @@ export default {
 </script>
 
 <style>
+img { 
+     width: 50px;
+     height: 50px;
+}
 
 </style>

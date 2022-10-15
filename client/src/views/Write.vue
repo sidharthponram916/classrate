@@ -1,9 +1,9 @@
 <template>
    <div class = 'p-2'>
           <div class = 'text-left m-auto bg-blue-800 text-white w-5/6'> 
-               <h1 class = 'text-left m-2 p-2 text-4xl'>Write a Review 📋</h1>
+               <h1 class = 'flex text-left m-2 p-2 text-4xl'><span class = 'mr-2'>Write a Review</span> 📋</h1>
                <p class = 'text-md m-2 p-2'> 
-                  Please fill out the information below respectfully in order to make a review. Please don't troll in these questions, as we have moderators that will regulate the stream. Reviews are 100% anonymous, so you do not have to risk identity leaks. With that, thank you for contributing to Edurate. 
+                  Please fill out the information below respectfully in order to make a review. Reviews are 100% anonymous, so you do not have to risk identity leaks. With that, thank you for contributing to ClassInfo. 
                </p>
           </div>
           <div class = 'text-left m-auto bg-white w-5/6'> 
@@ -95,7 +95,7 @@
                         <option value = "STEM">Technology/Engineering</option>
                     </select>
                     <br>
-                     <label class = 'text-left'>If possible, could you write the name of your instructor in firstName LastName format? (Optional)</label>
+                     <label class = 'text-left'>Could you write the first and last name of your instructor?</label>
                     <br>
                     <input
                       type = 'text'
@@ -283,7 +283,7 @@ export default {
          disablePage1() { 
             let { data } = this; 
 
-            if (data.category.trim("") == "" || data.course.trim("") == ""  || data.desc.trim("") == "" || (data.desc.length < 175)) { 
+            if (data.category.trim("") == "" || data.course.trim("") == ""  || data.desc.trim("") == "" || data.instructor.trim("") == "" || (data.desc.length < 175)) { 
                  return true; 
             }
             else { 
@@ -474,11 +474,12 @@ export default {
                   workload: this.data.workload, 
                   year: this.data.year, 
                   curriculum: this.data.curriculum,
-                  overall: this.data.overall
+                  overall: this.data.overall, 
+                  createdAt: Date.now()
               })
 
           let { data } = await this.$http.get(`/courses/get/${this.data.school._id}/${this.data.course}`);
-           let course = data; 
+           let course = data;
 
            if (!course) { 
               let newData = await this.$http.post('/courses/create', { 
@@ -496,39 +497,37 @@ export default {
 
           let teacher = await this.$http.get(`/teachers/getbysan/${this.data.instructor}/${this.data.school._id}`)
 
-          console.log(teacher); 
      
           if (!teacher.data) {              
                await this.$http.post('/teachers/create', { 
                     name: this.data.instructor, 
                     school: this.data.school.name, 
                     school_id: this.data.school._id, 
-                    courses: [this.data.course], 
+                    courses: [course._id], 
                     ratings: [rating.data]
                })
           }
           else { 
                teacher.data.ratings.push(rating.data); 
                
-               let course = teacher.data.courses.find(course => { 
+               let isCourse = teacher.data.courses.find(course => { 
                       return this.data.course === course; 
                })
 
-               if (!course) { 
-                    teacher.data.courses.push(this.data.course); 
+               if (!isCourse) { 
+                    teacher.data.courses.push(course._id); 
                }
 
           }
+
          if (teacher.data) { 
-          await this.$http.put(`/teachers/update/${teacher.data._id}`, teacher.data); 
+              await this.$http.put(`/teachers/update/${teacher.data._id}`, teacher.data); 
          }
 
                            
-             this.flashMessage.success({title: 'Review Submitted Successfully!', message: 'Thank you for contributing to EduRate!'});
+             this.flashMessage.success({title: 'Review Submitted Successfully!', message: 'Thank you for contributing to ClassInfo.org!'});
 
-
-             location.replace("/home"); 
-              
+             location.replace('/home')              
          }     
           catch (e) { 
               console.log(e); 
@@ -537,3 +536,10 @@ export default {
      }
 }
 </script>
+
+<style> 
+h1 img { 
+     width: 40px; 
+     height: 40px; 
+}
+</style>

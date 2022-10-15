@@ -3,7 +3,7 @@
       <Navbar /> 
       <router-view /> 
 
-  <div class = 'mt-auto text-center p-4 text-black'>ⓒ Edurate 9/5/22, An Educational Organization</div> 
+  <div class = 'mt-auto text-center p-4 text-black'>ⓒ Classrate 9/5/22, An Educational Organization</div> 
   </div>
 </template>
 <script> 
@@ -20,9 +20,11 @@ export default {
 
 </script> 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@900&display=swap');
-
-
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@900&family=Open+Sans:wght@600;700&family=Poppins:wght@600&display=swap');
+img { 
+    width: 30px;
+    height: 30px;
+}
 ::-webkit-scrollbar {
   width: 10px;
 }

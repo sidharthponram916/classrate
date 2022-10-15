@@ -1,14 +1,14 @@
 <template>
    <div class='lg:flex'>
-    <form @submit.prevent="login" class='bg-blue-800 p-5 float-right w-full lg:w-1/2 text-white'>
-      <h1 class='font-bold text-4xl m-2 text-center text-6xl text-white mt-20'>Log into EduRate</h1>
+    <form @submit.prevent="login" class='bg-blue-800 p-5 float-right w-full lg:w-1/2 text-white m-auto'>
+      <h1 class='font-bold text-4xl m-2 text-center text-6xl text-white mt-20 mb-20'>Login to ClassRate</h1>
       <br>
       <h1 class = 'text-white text-3xl text-center'>Username</h1>
       <input
           type="text"
           v-model="user.username"
           placeholder = "Username"
-          class='w-3/4 p-2 border-2 bg-transparent m-3 rounded font-bold mb-5 focus:outline-none text-xl'
+          class='w-3/4 p-2 border-b-2 bg-transparent m-3 font-bold mb-5 focus:outline-none text-white text-xl'
       >
       <br>
       <h1 class = 'text-white text-3xl text-center'>Password</h1>
@@ -16,17 +16,14 @@
           type='password'
           v-model='user.password'
           placeholder = "Password"
-          class='w-3/4 p-2 border-2 bg-transparent m-3 rounded font-bold mb-5 focus:outline-none text-xl'
+          class='w-3/4 p-2 border-b-2 bg-transparent m-3 font-bold mb-5 focus:outline-none text-white text-xl'
       >
       <br>
-      <button type="submit" class=' m-2 p-2 bg-green-500 text-white rounded text-2xl bg-blue-800 border-2'> Log In</button>
+      <button type="submit" class=' m-2 p-2 text-white rounded text-2xl bg-blue-600'> Log In</button>
       <br>
       <span class="text-lg text-red-500 font-bold">{{ err }}</span>
     </form>
 
-    <div style = "background:url('https://www.iesabroad.org/files/styles/news__1170x600_/public/default_featured_image_121.jpg?itok=kKD_IRsf');background-size:cover" class='bg-green-200 float-left w-3/2 flex-1 h-screen hidden lg:block'>
-           <h1 class = 'text-white text-8xl text-center mt-56'>Welcome back!</h1>
-    </div>
   </div>
 </template>
 
@@ -70,6 +67,6 @@ export default {
 
 <style>
   body { 
-     background: rgb(7, 64, 186)
+     background: rgb(13, 67, 183)
   }
 </style>

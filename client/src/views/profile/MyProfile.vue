@@ -46,6 +46,15 @@
          </div>
        </div>
 
+      <!--  <h1 class = 'text-left p-2 text-black text-3xl'>Connect with Home Access Center</h1>
+        <div>
+          <button class = 'p-2 m-2 flex bg-sky-800 text-white text-2xl rounded hover:bg-sky-900'>
+              <img class = 'w-10 h-10 m-auto mb-2 mr-2 mt-1 ' src = "https://resources.finalsite.net/images/f_auto,q_auto/v1626100427/k12albemarleorg/uj41eppe27bunrvhwnep/PowerSchoolLogos_Vertical-01.png">
+              <span class = 'align-middle mt-2 mr-2'>Connect with HAC </span>
+          </button>
+          </div> 
+       -->
+
    </div>
 </template>
 
@@ -71,7 +80,6 @@ export default {
               return review.username === data.username
          })  
 
-         console.log(reviews)
 
          this.reviews = reviews; 
      }, 
@@ -97,24 +105,34 @@ export default {
                        return course.name === review.course && course.school_id === review.school_id;
                  })
 
-                 console.log(course)
 
 
                  let rating = course.ratings.find(rating => { 
                      return rating.data._id === review._id; 
                  })
 
-                 console.log(course.ratings.length)
 
                  course.ratings.splice(course.ratings.indexOf(rating), 1)
                  
-                 console.log(course.ratings.length)
 
                  await this.$http.put(`/courses/update/${course._id}`, course); 
     
+               let teachers = await this.$http.get('/teachers/all'); 
+
+               let teacher = teachers.data.find(teacher => { 
+                    return teacher.name === review.instructor; 
+               })
+
+               let teacherRating = teacher.ratings.find(r => { 
+                     return r._id === review._id
+               })
+
+               teacher.ratings.splice(teacher.ratings.indexOf(teacherRating), 1); 
+
+               await this.$http.put(`/teachers/update/${teacher._id}`, teacher); 
 
 
-               location.reload()
+              location.reload()
              }
              catch (e) { 
                 alert("An error has occured when deleting!")

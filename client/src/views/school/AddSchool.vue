@@ -175,7 +175,7 @@ export default {
            })
            location.replace("/home")
            
-           this.flashMessage.success({title: 'School Added Successfully!', message: 'Thank you for contributing to EduRate!'});
+           this.flashMessage.success({title: 'School Added Successfully!', message: 'Thank you for contributing to Classrate!'});
        }
    }
 }

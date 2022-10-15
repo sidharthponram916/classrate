@@ -65,9 +65,13 @@ const reviewSchema = new Schema({
         type: Number, 
         required: true
     },
+    upvotes: { 
+        type: Array, 
+        default: []
+    },
     createdAt: { 
         type: Date, 
-        default: new Date()
+        required: true
     }
 })
 

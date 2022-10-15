@@ -1,7 +1,7 @@
 <template>
    <div class='lg:flex'>
     <form @submit.prevent="signUp" class='bg-blue-800 p-5 float-right w-full lg:w-1/2 text-white min-h-screen relative'>
-      <h1 class='font-bold text-4xl mb-10 m-2 text-center text-6xl text-white mt-16'>Register for EduRate</h1>
+      <h1 class='font-bold text-4xl mb-10 m-2 text-center text-6xl text-white mt-16'>Register</h1>
       <br>
       <h1 class = 'text-white text-3xl text-center'>Username</h1>
       <input
@@ -28,7 +28,6 @@
       >
       <br>
       <button type="submit" class=' m-2 p-2 bg-green-500 text-white rounded text-2xl bg-blue-900'>Sign Up</button>
-      <h1>By signing up, you agree to our terms and conditions, such that you will use this website appropriately and responsibly for the best experience.</h1>
     </form>
 
     <div style = "background:url('https://www.iesabroad.org/files/styles/news__1170x600_/public/default_featured_image_121.jpg?itok=kKD_IRsf');background-size:cover" class='relative bg-green-200 float-left w-3/2 flex-1 h-screen hidden lg:block text-white'>
@@ -38,6 +37,7 @@
               <h1 class = 'text-left p-2 m-2 text-3xl'>1) Writing reviews, and rating classes.</h1>
               <h1 class = 'text-left p-2 m-2 text-3xl'>2) Adding schools in your area.</h1>
               <h1 class = 'text-left p-2 m-2 text-3xl'>3) Access to exclusive information on school courses and teachers!</h1>
+              <h1 class = 'text-left p-2 m-2 text-3xl'>3) Access to exclusive tools such as the Class builder!</h1>
            </div>
     </div>
   </div>
