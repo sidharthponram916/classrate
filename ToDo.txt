@@ -1,5 +1,0 @@
-#### To DO 
-
-- Create Upvoting/Downvoting System 
-- Make Search Keywords 
-- Possibly create the HAC Connect System

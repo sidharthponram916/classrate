@@ -3,7 +3,7 @@
         <div  class = 'p-2 m-2 bg-blue-600 w-11/12 mt-8 mx-auto h-11/12 relative text-white'> 
 
           <div v-if = "page1">
-                        <p class = 'p-2 text-xl mb-5'><span class = 'text-6xl mb-2'>Class<span class = 'text-yellow-300'>Builder</span></span></p> 
+                        <p class = 'p-2 text-2xl mb-5'><span class = 'text-6xl mb-2'>Class<span class = 'text-yellow-300'>Builder</span></span><br> Trying to pick your classes for next semester? We got you.</p> 
             <h1 class = 'text-3xl mb-5 mt-20'>Select your School</h1>
 
             <select
@@ -30,7 +30,7 @@
         <div v-if = "page2 && data.courses.length >= 5" class = 'flex'> 
               
                <div class = 'bg-blue-800 text-white w-1/2 p-5 mb-2'> 
-                   <h1 class = 'text-4xl mb-2'>Schedule <br> <span class = 'text-xl'>Remember to balance out your classes!</span></h1>
+                   <h1 class = 'text-3xl mb-2'>Schedule <br> <span class = 'text-sm'>Click on the boxes below to add a class. </span></h1>
                 
                    <select v-for = "index in this.repeat" :key = "index"  class = 'p-5 w-11/12 text-white border-4 m-2 bg-blue-600 border-white text-2xl focus:outline-none' v-model = "selected[index - 1]" @change="generateInfo"> 
                         <option class = 'text-white' v-for = "course in data.courses" :key = "course._id" :value = "course._id">{{ course.name }}</option> 
@@ -46,22 +46,22 @@
                    <div class = 'bg-white text-black flex flex-wrap'>
                       <div class = 'p-2 m-2 w-auto'> 
                           <h1 class = 'text-3xl text-left p-2'>4.0 GPA</h1>
-                          <h1 class = 'text-xl'><span class = 'text-8xl text-green-600'>{{ this.stats.gpa.toFixed(2) }}</span></h1>
+                          <h1 :class = 'color.gpa' class = 'text-xl'><span class = 'text-8xl'>{{ this.stats.gpa.toFixed(2) }}</span></h1>
                       </div> 
                       <div class = 'p-2 m-2 w-auto'> 
                           <h1 class = 'text-3xl text-left p-2'>Difficulty</h1>
-                          <h1 class = 'text-xl'><span class = 'text-8xl text-yellow-700'>{{ this.stats.difficulty.toFixed(1) }}</span>/10</h1>
+                          <h1 :class = 'color.difficulty' class = 'text-xl'><span class = 'text-8xl'>{{ this.stats.difficulty.toFixed(1) }}</span>/10</h1>
                       </div> 
                       <div class = 'p-2 m-2 w-auto'> 
                           <h1 class = 'text-3xl text-left p-2'>Engagement</h1>
-                          <h1 class = 'text-xl'>
-                        <span class = 'text-8xl text-green-600'>
+                          <h1 :class = 'color.engagement' class = 'text-xl'>
+                        <span class = 'text-8xl'>
                             {{ this.stats.engagement.toFixed(1) }}
                         </span>/10</h1>
                       </div> 
                       <div class = 'p-2 m-2 w-auto'> 
                           <h1 class = 'text-3xl text-left p-2'>Workload</h1>
-                          <h1 class = 'text-xl'><span class = 'text-8xl text-red-700'>{{ this.stats.workload.toFixed(1) }}</span>/10</h1>
+                          <h1 :class = 'color.workload' class = 'text-xl'><span class = 'text-8xl'>{{ this.stats.workload.toFixed(1) }}</span>/10</h1>
                       </div> 
 
                    </div>
@@ -76,7 +76,7 @@
                </div>
         </div>
         <div v-else> 
-             This feature is only avaiable for schools with over 5 classes registered onto the site. Promote this website today so you can access this feature!
+             This feature is only available for schools with over 5 classes registered onto the site. Promote this website today so you can access this feature!
         </div>
         
 
@@ -117,7 +117,13 @@ export default {
            page1: true, 
            page2: false,
            selected: [], 
-           repeat: 5
+           repeat: 5, 
+           color: { 
+               engagement: "text-gray-700",
+               difficulty: "text-gray-700",
+               workload: "text-gray-700",
+               gpa: "text-gray-700",
+           }
        }
    }, 
    async mounted()  { 
@@ -133,7 +139,9 @@ export default {
         courses.data.sort((a, b) => a.name.localeCompare(b.name))
 
         this.data.courses = courses.data; 
-
+               
+       
+        
    }, 
    methods: { 
         goPage2() { 
@@ -375,6 +383,54 @@ export default {
             }
 
             // Colors Highlightings
+
+        if (this.stats.engagement <= 2) { 
+            this.color.engagement = "text-red-600"
+        }
+        else if (this.stats.engagement <= 4) { 
+            this.color.engagement = "text-red-400"
+        }
+        else if (this.stats.engagement <= 6) { 
+            this.color.engagement = "text-yellow-500"
+        }
+        else if (this.stats.engagement <= 8) {
+             this.color.engagement = "text-green-700"
+        }
+        else { 
+             this.color.engagement = "text-green-800"
+        }
+
+        if (this.stats.workload >= 9) { 
+            this.color.workload = "text-red-600"
+        }
+        else if (this.stats.workload >= 7) { 
+            this.color.workload = "text-red-600"
+        }
+        else if (this.stats.workload >= 5) { 
+            this.color.workload = "text-yellow-500"
+        }
+        else if (this.stats.workload >= 3) {
+             this.color.workload = "text-green-500"
+        }
+        else { 
+             this.color.workload = "text-green-700"
+        }
+
+        if (this.stats.difficulty >= 9) { 
+            this.color.difficulty = "text-red-600"
+        }
+        else if (this.stats.difficulty >= 7) { 
+            this.color.difficulty = "text-red-600"
+        }
+        else if (this.stats.workload >= 5) { 
+            this.color.workload = "text-yellow-500"
+        }
+        else if (this.stats.workload >= 3) {
+             this.color.workload = "text-green-500"
+        }
+        else { 
+             this.color.workload = "text-green-700"
+        }
 
         }
    }, 

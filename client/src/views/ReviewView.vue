@@ -10,11 +10,11 @@
         <span class = 'text-3xl p-2 m-2'>Instructor: <span class = 'text-gray-700 text-3xl'>{{ review.instructor }} </span></span>
         <div class = 'flex m-2 p-2 grid grid-cols-2 md:grid-cols-4'>
                  <span class = 'text-3xl mt-2 mr-32'>Difficulty<br><span :class = 'color.difficulty' class = 'text-8xl'>{{ review.difficulty }}</span>/10</span>
-                 <span class = 'text-3xl mt-2 mr-32'>Curriculum<br><span :class = 'color.curriculum' class = 'text-8xl'> {{ review.curriculum }}</span>/10</span>
+                 <span class = 'text-3xl mt-2 mr-32'>Engagement<br><span :class = 'color.curriculum' class = 'text-8xl'> {{ review.curriculum }}</span>/10</span>
                  <span class = 'text-3xl mt-2 mr-32 '>Workload <br><span :class = 'color.workload' class = 'text-8xl'>{{ review.workload }}</span>/10</span>
                  <span class = 'text-3xl mt-2 mr-32'>Instructor<br><span :class = 'color.instructorRating' class = 'text-8xl'> {{ review.instructorRating }}</span>/10</span>
         </div>
-         <span class = 'text-3xl p-2 m-2'>Grade Recieved<br><span :class = 'color.grade' class = 'text-8xl p-2 m-2'> {{ review.grade }}</span></span>
+         <span class = 'text-3xl p-2 m-2'>Grade Received<br><span :class = 'color.grade' class = 'text-8xl p-2 m-2'> {{ review.grade }}</span></span>
          <div class = 'p-2 m-2 w-1/2 md:w-3/4'>
           <h1 class = 'text-3xl mb-2'> Review </h1>
           <p class = 'text-xl text-gray-600'>{{ review.desc }}</p>
@@ -32,7 +32,7 @@
              <h1 class = 'text-xl'>{{ review.course }} </h1>
              <h1 class = 'text-sm text-gray-600 mb-2'>{{ review.school }} </h1>
              <h1 class = 'text-2xl text-yellow-500 mb-2'>{{ rating(review.overall) }} </h1>
-             <p> {{review.desc.slice(0, 100)}}...</p>
+             <p style = "font-family: "> {{review.desc.slice(0, 100)}}...</p>
          </div>
     </a>
    </div>

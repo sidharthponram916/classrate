@@ -243,7 +243,7 @@ export default {
         return { 
             schools: [], 
             style: { 
-                input: "p-2 mt-2 mb-2 w-11/12 text-xl bg-gray-200 rounded focus:outline-none"
+                input: "p-2 mt-2 mb-2 w-11/12 text-xl bg-gray-200 border-b-2 border-white focus:outline-none"
             }, 
             ap: "No",
             data: { 
