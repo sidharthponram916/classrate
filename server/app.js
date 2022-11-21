@@ -8,14 +8,14 @@ const db = require('./config/db.config');
 
 app.use(cors());
 
-db();  
-
+db();      
+ 
 app.use(express.urlencoded({ extended: true}));
 app.use(express.json()); 
 
 app.get('/api', (req,res) => { 
      res.send("Welcome to the ReviewMyCourse API"); 
-})
+})       
 
 app.use('/api/users', require("./routes/user.routes.js")); 
 app.use('/api/reviews', require('./routes/review.routes.js'));
@@ -34,4 +34,4 @@ if (process.env.NODE_ENV === "production") {
 
 app.listen(process.env.PORT || 2022, () => { 
      console.log("ReviewMyCourse Server Up and Running!"); 
-})    
+})           

@@ -1,16 +1,18 @@
 <template>
 <div> 
-    <div class = 'w-full p-2 m-auto rounded'>
-    <div class = 'm-5 p-5 text-white text-left bg-sky-900 w-11/12'> 
+    <div class = 'w-full m-auto rounded'>
+    <div class = 'p-7 text-white text-left bg-sky-700 w-full'> 
          <h1 class = 'text-4xl'>Welcome, {{ this.$store.state.userData.username }}</h1>
          <p class = 'p-2 mt-5'>Your homepage usually contains recent updates from ClassRate, and Recent Activity from around the world!</p>
              <Searchbar styling = "rounded" />
     </div>
-     <div class = 'text-black p-2 w-11/12'>  
-        <div class ='text-3xl text-black text-center md:text-left p-2 mx-2'>Recent Activity</div>
+
+
+     <div class = 'text-black bg-blue-100 p-2 m-auto w-full'>  
+        <div class ='text-3xl text-black text-center md:text-left p-2 mx-2 mb-5'>Recent Activity</div>
         <div v-if = "getReviews.length === 0">No Reviews... Write your first review today!</div>
-        <div class = 'flex flex-wrap gap-4 text-black md:p-2 md:m-2'> 
-            <div class = 'flex' v-for = "review in getReviews" :key = "review._id">
+        <div class = 'flex flex-grid grid-cols-2 gap-2 overflow-x-scroll text-black md:p-2 md:m-2'> 
+            <div class = 'm-auto md:m-2' v-for = "review in getReviews" :key = "review._id">
              
                <div style = "width:310px" :style = "'background:' + school(review.school_id).color" class = 'relative text-left p-3 bg-blue-500 text-white h-96 shadow-lg mr-auto md:mr-3'>
                     <h1 class = 'text-2xl'>{{ review.course }}</h1>
@@ -25,13 +27,13 @@
         </div>
       
        </div>
-    <div class = 'text-black p-2 w-11/12'>  
+    <div class = 'text-black bg-green-100 p-2 m-auto w-full'>  
        <div class ='text-3xl text-black text-center md:text-left p-2 mx-2'>Schools</div>
     <div class = 'flex flex-wrap p-2'>
        <div class = 'flex p-2' v-for = "school in schools" :key = "school._id">
             <a :href = "'/schools/view/' + school._id">
               <div class = 'p-2' :style = "'background:' + school.color"> 
-                 <div class = 'text-white text-2xl text-left'>{{ school.name }}</div>
+                 <div class = 'text-white text-sm md:text-2xl text-left'>{{ school.name }}</div>
                  <div class = 'text-white text-sm text-left'>{{ school.count }} Reviews</div>
               </div>
             </a>
@@ -137,5 +139,7 @@ span.text-7xl img {
     height:80px; 
     margin: auto; 
 }
-
+div::-webkit-scrollbar-thumb {
+  background: none;
+}
 </style>

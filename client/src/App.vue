@@ -2,8 +2,8 @@
   <div id="app" class = 'flex flex-col min-h-screen'>
       <Navbar /> 
       <router-view /> 
-
-  <div class = 'mt-auto text-center p-4 text-black'>ⓒ Classrate 9/5/22, An Educational Organization</div> 
+    <div class = 'mt-auto text-center p-4 text-black'>
+     ⓒ Classrate 9/5/22, An Educational Organization</div> 
   </div>
 </template>
 <script> 
@@ -45,11 +45,11 @@ button:disabled {
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: rgb(0, 0, 0);
+  background: rgb(132, 130, 130);
 }
 
 body { 
-   background: rgb(226, 241, 244)
+   background: rgb(200, 215, 235)
 }
 
 #app {
@@ -57,7 +57,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: #000000;
 }
 
 #nav {

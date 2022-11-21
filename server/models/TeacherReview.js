@@ -31,7 +31,7 @@ const teacherReviewSchema = new Schema({
          required: true
       }, 
       upvotes: {
-        type: Number, 
+        type: Number,    
         default: 0
       }, 
       downvotes: {

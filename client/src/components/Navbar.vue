@@ -1,5 +1,5 @@
 <template>
-<ul class="flex relative items-center justify-between bg-gradient-to-r from-blue-800 to-blue-500 text-white p-3 w-full">
+<ul class="flex relative items-center bg-blue-900 justify-between text-white p-3 w-full">
      <li class = ' mr-6'> 
          <a href = '/home' class = 'block align-middle text-2xl p-2'><span class = 'flex'>🎓 <span class = 'ml-2'>Class<span class = 'text-yellow-200'>Rate</span></span></span></a>  
      </li>

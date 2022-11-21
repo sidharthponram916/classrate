@@ -5,8 +5,7 @@
                <div class = 'flex p-2 m-2 text-white'>
                  <img :src = "school.url" class = 'w-16 h-16 rounded-full mr-3'>
                   <h1 class = 'text-left text-4xl mr-4'>{{ school.name }} <br> 
-                     <h1 class = 'text-xl'>{{ school.address }} - {{ school.city }}, {{ school.state }}</h1> 
-                     <!-- <div class = 'mt-2'>★★★★☆</div> -->
+                     <h1 class = 'text-xl'> ★★★★☆ | {{ school.address }} - {{ school.city }}, {{ school.state }}</h1> 
                   </h1>
                   <h1 class = 'text-left ml-auto'><a :href = "'/schools/edit/' + school._id"> Edit Information ✏️</a></h1>
                </div>

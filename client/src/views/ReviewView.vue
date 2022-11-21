@@ -22,7 +22,15 @@
         <button @click = "upvote()" :class = "color.upvote" class = 'p-3 m-4 bg-sky-700 mr-auto rounded text-white shadow-lg text-2xl'>{{ this.upvotes.length }} <span id = "eno">⬆️</span></button> 
         <button @click = "clicked()" v-clipboard:copy = "message" class = 'p-3 m-4 bg-green-500 mr-auto rounded text-white shadow-lg text-2xl'>Share <span id = "eno">👥</span></button>
   </div>
-
+  <div class = 'w-11/12 text-left m-5 p-2 bg-white'>
+    <h1 class = 'text-left text-3xl text-black m-2'>Threads</h1>
+    <div class = 'p-2 m-2 border-2'> 
+       <div class = 'text-gray-600'>Anonymous</div>
+         {{ review.desc }}
+         <br>
+         <button class = 'p-2 m-2 text-black font-bold text-2xl rounded border-2'><img src = '../assets/reply.png' width = 10> </button>
+    </div>
+  </div>
 <div class = 'w-11/12 text-left m-5 p-2 bg-white'>
 <h1 class = 'text-left text-4xl text-black m-2 p-2'>Other Reviews</h1>
   <div class = 'flex grid grid-cols-1 gap-2 md:grid-cols-5 text-black pb-4'>

@@ -46,14 +46,13 @@
          </div>
        </div>
 
-      <!--  <h1 class = 'text-left p-2 text-black text-3xl'>Connect with Home Access Center</h1>
+      <h1 class = 'text-left p-2 text-black text-3xl'>Connect with Home Access Center</h1>
         <div>
           <button class = 'p-2 m-2 flex bg-sky-800 text-white text-2xl rounded hover:bg-sky-900'>
               <img class = 'w-10 h-10 m-auto mb-2 mr-2 mt-1 ' src = "https://resources.finalsite.net/images/f_auto,q_auto/v1626100427/k12albemarleorg/uj41eppe27bunrvhwnep/PowerSchoolLogos_Vertical-01.png">
-              <span class = 'align-middle mt-2 mr-2'>Connect with HAC </span>
+              <span class = 'align-middle mt-2 mr-2'>Home Access Center</span>
           </button>
           </div> 
-       -->
 
    </div>
 </template>

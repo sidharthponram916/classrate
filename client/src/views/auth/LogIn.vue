@@ -1,6 +1,6 @@
 <template>
    <div class='lg:flex'>
-    <form @submit.prevent="login" class='bg-blue-800 p-5 float-right w-full lg:w-1/2 text-white m-auto'>
+    <form @submit.prevent="login" class='bg-blue-700 p-5 float-right w-full lg:w-1/2 text-white m-auto'>
       <h1 class='font-bold text-4xl m-2 text-center text-6xl text-white mt-20 mb-20'>Login to ClassRate</h1>
       <br>
       <h1 class = 'text-white text-3xl text-center'>Username</h1>

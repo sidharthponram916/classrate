@@ -18,7 +18,7 @@ Vue.use(VueClipboard);
 Vue.config.productionTip = false 
 Vue.prototype.$http = http;  
 
-localStorage.setItem("baseUrl", "https://www.classrate.ml")
+localStorage.setItem("baseUrl", "https://edurate.herokuapp.com")
 
  if (localStorage.getItem('token')) { 
   store.commit("logIn");
