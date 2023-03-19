@@ -29,10 +29,6 @@ const reviewSchema = new Schema({
         type: String, 
         default: "N/A"
     },
-    category: { 
-        type: String, 
-        required: true
-    }, 
     year: { 
         type: String, 
         required: true

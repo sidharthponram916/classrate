@@ -1477,6 +1477,15 @@
     postcss "^8.4.14"
     source-map "^0.6.1"
 
+"@vue/compiler-sfc@2.7.14":
+  version "2.7.14"
+  resolved "https://registry.yarnpkg.com/@vue/compiler-sfc/-/compiler-sfc-2.7.14.tgz#3446fd2fbb670d709277fc3ffa88efc5e10284fd"
+  integrity sha512-aNmNHyLPsw+sVvlQFQ2/8sjNuLtK54TC6cuKnVzAY93ks4ZBrvwQSnkkIh7bsbNhum5hJBS00wSDipQ937f5DA==
+  dependencies:
+    "@babel/parser" "^7.18.4"
+    postcss "^8.4.14"
+    source-map "^0.6.1"
+
 "@vue/component-compiler-utils@^3.1.0", "@vue/component-compiler-utils@^3.1.2":
   version "3.3.0"
   resolved "https://registry.npmjs.org/@vue/component-compiler-utils/-/component-compiler-utils-3.3.0.tgz"
@@ -8385,6 +8394,13 @@ vue-loader@^15.9.2:
     vue-hot-reload-api "^2.3.0"
     vue-style-loader "^4.1.0"
 
+vue-oauth2-google@^1.0.20:
+  version "1.0.20"
+  resolved "https://registry.yarnpkg.com/vue-oauth2-google/-/vue-oauth2-google-1.0.20.tgz#5a2804ff0cfa6f37d7dab09bc3b785c6680fe44a"
+  integrity sha512-DylGrfz1R+300a5UMm4wDFAyH1k7vVbvnu3iBuAm5kVNhMb5WuBHnCMJnAI14HpGhbBfICWIzXUub5NYssVlJw==
+  dependencies:
+    vue "^2.6.0"
+
 vue-router@^3.2.0:
   version "3.5.4"
   resolved "https://registry.npmjs.org/vue-router/-/vue-router-3.5.4.tgz"
@@ -8422,6 +8438,14 @@ vue@^2.5.13:
   integrity sha512-HmFC70qarSHPXcKtW8U8fgIkF6JGvjEmDiVInTkKZP0gIlEPhlVlcJJLkdGIDiNkIeA2zJPQTWJUI4iWe+AVfg==
   dependencies:
     "@vue/compiler-sfc" "2.7.10"
+    csstype "^3.1.0"
+
+vue@^2.6.0:
+  version "2.7.14"
+  resolved "https://registry.yarnpkg.com/vue/-/vue-2.7.14.tgz#3743dcd248fd3a34d421ae456b864a0246bafb17"
+  integrity sha512-b2qkFyOM0kwqWFuQmgd4o+uHGU7T+2z3T+WQp8UBjADfEv2n4FEMffzBmCKNP0IGzOEEfYjvtcC62xaSKeQDrQ==
+  dependencies:
+    "@vue/compiler-sfc" "2.7.14"
     csstype "^3.1.0"
 
 vue@^2.6.11:

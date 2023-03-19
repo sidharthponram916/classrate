@@ -12,6 +12,6 @@ router.use(require('../middleware/verify'));
 
 router.post('/create', courseController.createCourse); 
 router.put('/update/:id', courseController.updateCourse); 
-router.put('/delete/:id', courseController.deleteCourse); 
+router.delete('/delete/:id', courseController.deleteCourse); 
 
 module.exports = router; 

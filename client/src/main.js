@@ -1,50 +1,62 @@
-import Vue from 'vue'
-import App from './App.vue'
-import router from './router'
-import FlashMessage from '@smartweb/vue-flash-message'
-import VueClipboard from "vue-clipboard2"; 
-import animatenumber from 'animated-number-vue'; 
-import store from './store'; 
-import http from './http'; 
-import Ads from 'vue-google-adsense'
+import Vue from "vue";
+import App from "./App.vue";
+import router from "./router";
+import FlashMessage from "@smartweb/vue-flash-message";
+import VueClipboard from "vue-clipboard2";
+import animatenumber from "animated-number-vue";
+//import config from '../config'
+import store from "./store";
+import http from "./http";
+import Ads from "vue-google-adsense";
+import GAuth from "vue-oauth2-google";
 
+const gAuthOptions = {
+  clientId:
+    "199941469614-tcdpve2r36ljnm2o504ptn992udrj75e.apps.googleusercontent.com",
+  scope: "profile email",
+  successCallback: () => {
+    console.log("Success!!");
+  },
+  errorCallback: (e) => console.log(e),
+};
 
-Vue.use(require('vue-script2'))
-Vue.use(Ads.Adsense)
-Vue.use(FlashMessage); 
-Vue.use(animatenumber)
-Vue.use(VueClipboard); 
+Vue.use(GAuth, gAuthOptions);
 
-Vue.config.productionTip = false 
-Vue.prototype.$http = http;  
+Vue.use(require("vue-script2"));
+Vue.use(Ads.Adsense);
+Vue.use(FlashMessage);
+Vue.use(animatenumber);
+Vue.use(VueClipboard);
 
-localStorage.setItem("baseUrl", "https://edurate.herokuapp.com")
+Vue.config.productionTip = false;
+Vue.prototype.$http = http;
 
- if (localStorage.getItem('token')) { 
+localStorage.setItem("baseUrl", "https://www.classrate.ml");
+
+if (localStorage.getItem("token")) {
   store.commit("logIn");
-  http.defaults.headers.common["Authorization"] = localStorage.getItem('token');
-       
+  http.defaults.headers.common["Authorization"] = localStorage.getItem("token");
+
   http
-  .get("/users/current")
-  .then(res => { 
-     store.commit("setUserData", res.data); 
-  })
-  .catch(err => { 
-      console.log(err.message); 
+    .get("/users/current")
+    .then((res) => {
+      store.commit("setUserData", res.data);
+    })
+    .catch((err) => {
+      console.log(err.message);
 
-    delete http.defaults.headers.common["Authorization"];
-       
-      localStorage.removeItem("token"); 
+      delete http.defaults.headers.common["Authorization"];
 
-      store.commit("logOut"); 
-      
-      location.replace("/login"); 
-  })
- 
-} 
+      localStorage.removeItem("token");
+
+      store.commit("logOut");
+
+      location.replace("/login");
+    });
+}
 
 new Vue({
   router,
-  store, 
-  render: h => h(App)
-}).$mount('#app')
+  store,
+  render: (h) => h(App),
+}).$mount("#app");
