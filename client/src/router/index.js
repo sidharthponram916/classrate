@@ -14,6 +14,9 @@ const routes = [
     path: "/view/stream",
     name: "Stream",
     component: () => import("../views/Stream.vue"),
+    meta: {
+      authProtected: true,
+    },
   },
   {
     path: "/login",
@@ -80,9 +83,17 @@ const routes = [
     component: () => import("../views/VerifyEmail.vue"),
   },
   {
+    path: "/user/:id/resetpwd/:token",
+    name: "ResetPassword",
+    component: () => import("../views/ResetPassword.vue"),
+  },
+  {
     path: "/admin/44_ajk2dfsd7f5adsfadslfjdsaf4w22247f42",
     name: "Admin",
     component: () => import("../views/auth/AdminDB.vue"),
+    meta: {
+      authProtected: true,
+    },
   },
 ];
 

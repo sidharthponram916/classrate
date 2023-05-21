@@ -3,8 +3,8 @@
     <Navbar />
     <router-view />
     <div class="mt-auto text-center p-4 text-white bg-blue-500 mt-2">
-      Copyright &copy; Class<span class="text-yellow-300">Rate</span> 2022-2023
-      All rights reserved.
+      Copyright &copy; Class<span class="text-yellow-200">Rate</span>
+      2022-2023 All rights reserved.
     </div>
   </div>
 </template>

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="review.course">
     <!-- This code could be converted into a component....  -->
     <SearchBar />
     <div class="bg-white text-black w-11/12 text-left mx-5 lexend">
@@ -12,14 +12,16 @@
         </a>
       </h1>
       <p class="px-2 mx-2">
-        Written by a student on
+        Written by a student
         <span class="text-blue-600 font-bold">{{ review.createdAt }}</span
         >.
       </p>
       <p class="px-2 mx-2">
         Class finished on
-        <span class="text-blue-700 font-bold">{{ formatDate(review.year) }}</span> through
-        {{ review.type.toLowerCase() }} instruction.
+        <span class="text-blue-700 font-bold">{{
+          formatDate(review.year)
+        }}</span>
+        through {{ review.type.toLowerCase() }} instruction.
       </p>
       <h1 class="text-yellow-500 p-2 text-6xl">{{ rating(review.overall) }}</h1>
       <span class="text-3xl p-2 m-2 font-bold"
@@ -30,13 +32,17 @@
       >
       <div class="flex m-2 p-2 grid grid-cols-2 md:grid-cols-4 font-bold">
         <span class="text-3xl mt-2 mr-32"
-          >Difficulty<br /><span :class="color.difficulty" class="text-8xl lato">{{
-            review.difficulty
-          }}</span
+          >Difficulty<br /><span
+            :class="color.difficulty"
+            class="text-8xl lato"
+            >{{ review.difficulty }}</span
           >/10</span
         >
         <span class="text-3xl mt-2 mr-32"
-          >Engagement<br /><span :class="color.curriculum" class="text-8xl lato">
+          >Engagement<br /><span
+            :class="color.curriculum"
+            class="text-8xl lato"
+          >
             {{ review.curriculum }}</span
           >/10</span
         >
@@ -72,7 +78,8 @@
         :class="color.upvote"
         class="p-3 m-4 bg-sky-700 mr-auto rounded text-white shadow-lg text-2xl lexend font-bold"
       >
-        {{ this.upvotes.length }} <i class="fa-sharp fa-solid fa-thumbs-up ml-2"></i>
+        {{ this.upvotes.length }}
+        <i class="fa-sharp fa-solid fa-thumbs-up ml-2"></i>
       </button>
       <button
         @click="clicked()"
@@ -91,13 +98,15 @@
        
     </div>
   </div> -->
-    <div class="w-11/12 text-left m-5 p-2 bg-white">
-      <h1 class="text-left text-4xl text-black m-2 p-2">Other Reviews</h1>
+    <div class="w-11/12 text-left m-5 p-2 bg-white lexend">
+      <h1 class="text-left text-4xl text-black m-2 p-2 font-bold">
+        Other Reviews
+      </h1>
       <div class="flex grid grid-cols-1 gap-2 md:grid-cols-5 text-black pb-4">
         <div v-for="review in randomSet" :key="review._id">
           <a :href="'/reviews/' + review._id">
             <div class="p-4 m-2 border-2 rounded bg-white h-full">
-              <h1 class="text-xl">{{ review.course }}</h1>
+              <h1 class="text-xl font-semibold">{{ review.course }}</h1>
               <h1 class="text-sm text-gray-600 mb-2">{{ review.school }}</h1>
               <h1 class="text-2xl text-yellow-500 mb-2">
                 {{ rating(review.overall) }}
@@ -109,6 +118,7 @@
       </div>
     </div>
   </div>
+  <div v-else>Page not found!</div>
 </template>
 
 <script>
@@ -152,17 +162,20 @@ export default {
       return data.slice(1, 6);
     },
   },
-  async mounted() {
+  async beforeCreate() {
     let { data } = await this.$http.get(
       `/reviews/get/${this.$route.params.id}`
     );
     let all = await this.$http.get(`/reviews/all`);
 
-    data.createdAt = moment(data.createdAt).format("LLL");
+    data.createdAt = moment(data.createdAt).fromNow();
 
     this.upvotes = data.upvotes;
     this.review = data;
+
     this.all = all.data;
+
+    document.title = `Review of ${data.course} at ${data.school}`;
 
     const school = await this.$http.get(`/schools/get/${data.school_id}`);
 
@@ -331,6 +344,8 @@ ${localStorage.getItem("baseUrl")}${this.$route.fullPath} `;
       alert("Information copied to clipboard!");
     },
     async upvote() {
+      if (!localStorage.getItem("token")) return location.replace("/login");
+
       let upvoted = this.upvotes.find((user) => {
         return user === this.$store.state.userData.username;
       });

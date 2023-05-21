@@ -21,8 +21,8 @@
           <label class="text-left">Select Class Type.</label>
           <br />
           <select :class="style.input" v-model="ap">
-            <option value="Yes">AP</option>
-            <option value="No">Custom</option>
+            <option value="Yes" class = 'font-bold'>AP</option>
+            <option value="No" class = 'font-bold'>Custom</option>
           </select>
           <br />
           <label v-if="ap == 'No'" class="text-left"
@@ -676,5 +676,8 @@ export default {
 h1 img {
   width: 40px;
   height: 40px;
+}
+option { 
+  font-weight: 70px;
 }
 </style>

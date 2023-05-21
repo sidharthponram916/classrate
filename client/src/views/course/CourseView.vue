@@ -8,7 +8,12 @@
       <div class="flex p-2 m-2 text-white">
         <img :src="school.url" class="w-16 h-16 rounded-full mr-3" />
         <h1 class="text-left text-4xl mr-4 font-bold">
-          {{ course.name }} <span class="text-xl">at {{ school.name }}</span
+          {{ course.name }}
+          <span class="text-xl"
+            >at
+            <a :href="'/schools/view/' + school._id"
+              >{{ school.name }}
+            </a></span
           ><br />
           <h1 class="text-xl">
             <span class="text-yellow-400 text-3xl">
@@ -139,7 +144,7 @@ export default {
     let school = await this.$http.get("/schools/get/" + this.course.school_id);
     this.school = school.data;
 
-    document.title = `${this.course.name} at ${this.school.name}`;
+    document.title = `${this.course.name} at ${this.school.name} | Classrate.org`;
 
     let ratings = course.data.ratings;
 

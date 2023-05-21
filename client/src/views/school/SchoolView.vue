@@ -13,9 +13,9 @@
             {{ school.address }} - {{ school.city }}, {{ school.state }}
           </h1>
         </h1>
-        <h1 class="text-left ml-auto">
+        <!-- <h1 class="text-left ml-auto">
           <a :href="'/schools/edit/' + school._id"> Edit Information </a>
-        </h1>
+        </h1> -->
       </div>
       <div v-if="school.website != ''">
         <h1 class="text-left mx-4 text-xl mb-4">
@@ -177,7 +177,7 @@ export default {
     );
     this.school = data;
 
-    document.title = `${this.school.name} on ClassRate`;
+    document.title = `${this.school.name} on ClassRate.org`;
 
     let all = await this.$http.get(`/courses/all`);
 

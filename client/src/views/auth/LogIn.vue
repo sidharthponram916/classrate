@@ -1,6 +1,6 @@
 <template>
   <div>
-    <form autocomplete="off">
+    <form @submit.prevent="login" autocomplete="off">
       <h1 class="p-2 m-2 text-white text-7xl mt-7 mb-7">
         Class<span class="text-yellow-300">Rate</span
         ><span class="text-2xl">.org</span>
@@ -26,11 +26,22 @@
       >
         Sign In
       </button>
-      <h1 class="text-white">{{ err }}</h1>
+      <h1
+        v-if="err"
+        class="text-red-600 bg-gray-200 mt-2 p-2 m-2 rounded w-1/2 m-auto"
+      >
+        {{ err }}
+      </h1>
       <p class="text-white text-xl mt-5 mb-2">
         <i class="fa-sharp fa-solid fa-circle-info"></i> Don't have an account?
         Sign up <a href="/signup" class="text-blue-200">here </a> or sign in
-        with these providers.
+        with these providers. <br />
+      </p>
+      <button><div ref="googleLoginBtn"></div></button>
+      <p class="text-white text-xl mt-2 mb-2">
+        <i class="fa-sharp fa-solid fa-circle-info"></i> Forgot your password?
+        Click <a class="text-blue-200" @click="sendPasswordEmail()">here</a> to
+        send a password reset email.
       </p>
       <!--  <button class="open text-2xl mt-2 p-2 rounded mb-2 bg-gray-200">
         <img src="../../assets/google.png" class="w-10 h-10" />
@@ -40,6 +51,7 @@
 </template>
 
 <script>
+import decode from "jwt-decode";
 export default {
   data() {
     return {
@@ -47,12 +59,23 @@ export default {
       err: "",
     };
   },
-  async mounted() {},
+  async mounted() {
+    window.google.accounts.id.initialize({
+      client_id:
+        "199941469614-tcdpve2r36ljnm2o504ptn992udrj75e.apps.googleusercontent.com",
+      callback: this.authenticateWithGoogle,
+      auto_select: false,
+    });
+
+    window.google.accounts.id.renderButton(this.$refs.googleLoginBtn, {
+      text: "signin_with",
+      size: "large",
+      theme: "outline",
+      logo_alignment: "left",
+      auto_select: true,
+    });
+  },
   methods: {
-    async gauth() {
-      const g_user = await this.$gAuth.signIn();
-      console.log(g_user);
-    },
     async login() {
       try {
         let { data } = await this.$http.post("/users/login", {
@@ -69,12 +92,39 @@ export default {
         this.$http.defaults.headers.common["Authorization"] =
           localStorage.getItem("token");
 
-        location.replace("/");
+        location.replace("/view/stream");
       } catch (e) {
-        if (e.response.status == 404) {
+        if (e.response.status == 400 || e.response.status == 404) {
           this.err =
             "Invalid Authentication. Your username or password may be incorrect!";
         }
+      }
+    },
+    async sendPasswordEmail() {
+      let email = prompt("Enter your email to reset your password.");
+
+      let { data } = await this.$http.post("/users/email_preset", {
+        email: email,
+      });
+
+      console.log(data);
+    },
+    async authenticateWithGoogle(res) {
+      try {
+        let user = decode(res.credential);
+
+        let { data } = await this.$http.post("/users/googleauth", user);
+
+        this.$store.commit("logIn");
+        this.$store.commit("setUserdata", data.user);
+
+        localStorage.setItem("token", data.token);
+
+        this.$http.defaults.headers.common["Authorization"] = data.token;
+
+        location.replace("/view/stream");
+      } catch (e) {
+        console.log(e.message);
       }
     },
   },

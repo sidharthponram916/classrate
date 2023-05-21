@@ -113,9 +113,10 @@ module.exports = {
 
       if (!token) return res.status(400).json({ message: "Invalid Link. " });
 
-      user.verified = true;
-
-      await User.findByIdAndUpdate(user._id, user);
+      if (!user.verified) {
+        user.verified = true;
+        await User.findByIdAndUpdate(user._id, user);
+      }
 
       await token.remove();
 
@@ -125,7 +126,65 @@ module.exports = {
       res.status(500).json({ error: e.message });
     }
   },
+  async resetPassword(req, res) {
+    try {
+      const user = await User.findOne({ email: req.body.email });
+
+      const token = await EmailToken.create({
+        userId: user._id,
+        token: uuidv4(),
+      });
+
+      const link = `/user/${user._id}/resetpwd/${token.token}`;
+
+      await sendVerificationEmail(
+        `${req.body.email}`,
+        "Reset your password.",
+        `Click on this link to change your password. Make sure not to reload the page, otherwise, the page will reset. This is ensured for security purposes. ${process.env.FRONTEND_URL}${link}`
+      );
+
+      res
+        .status(200)
+        .json({ message: "Password reset email sent successfully!" });
+    } catch (e) {
+      res.status(500).json(e.message);
+    }
+  },
+  async changePassword(req, res) {
+    try {
+      const user = await User.findOne({ _id: req.body.user_id });
+      console.log(user);
+      user.password = await bcrypt.hash(
+        req.body.pwd,
+        parseInt(process.env.SALT)
+      );
+      console.log(user);
+      let updated = await User.findByIdAndUpdate(req.body.user_id, user);
+      res.status(200).json(updated);
+    } catch (e) {
+      res.status(500).json(e.message);
+      console.log(e.message);
+    }
+  },
   async logInWithGoogle(req, res) {
-    console.log(req.body);
+    try {
+      const user = await User.findOne({ email: req.body.email });
+
+      if (!user) {
+        let newuser = await User.create({
+          username: req.body.name,
+          email: req.body.email,
+          password: req.body.jti,
+          verified: true,
+          provider: true,
+        });
+
+        res.status(200).json({ newuser, token: newuser.generateToken() });
+      } else {
+        res.status(200).json({ user, token: user.generateToken() });
+      }
+    } catch (e) {
+      res.status(500).json({ error: e.message });
+    }
   },
 };

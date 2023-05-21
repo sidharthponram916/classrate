@@ -3,7 +3,7 @@
     class="flex relative items-center bg-blue-900 justify-between text-white p-3 w-full font-bold"
   >
     <li class="mr-6">
-      <a href="/" class="block align-middle text-2xl p-2"
+      <a href="/view/stream" class="block align-middle text-2xl p-2"
         ><span class="flex lexend">
           <span class="ml-2 font-bold"
             >Class<span class="text-yellow-200">Rate</span

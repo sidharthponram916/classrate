@@ -1,5 +1,3 @@
 ## School Reviews and Discussion
 
-- Password Reset. 
-- Student Email Verification.
-- Rework Home Page. 
+- Google Sign On Only if Possible

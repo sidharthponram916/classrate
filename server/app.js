@@ -14,7 +14,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.get("/api", (req, res) => {
-  res.send("Welcome to the ReviewMyCourse API");
+  res.send("Welcome to the ReviewMfCourse API");
 });
 
 app.use("/api/users", require("./routes/user.routes.js"));

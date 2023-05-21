@@ -19,7 +19,7 @@
             <h1 class="text-2xl font-bold" :style="'color:' + school.color">
               {{ school.name }}
             </h1>
-            <p class="text-lg">{{ school.city }}, {{ school.state }}</p>
+            <p class="text-lg">{{ school.city }} {{ school.state }}</p>
           </div>
         </div>
       </div>
@@ -34,7 +34,7 @@
         <h1 class="text-2xl font-bold" :style="'color:' + selected.color">
           {{ selected.name }}
         </h1>
-        <p class="text-lg">{{ selected.city }}, {{ selected.state }}</p>
+        <p class="text-lg">{{ selected.city }} {{ selected.state }}</p>
       </div>
     </div>
   </div>
