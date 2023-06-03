@@ -30,11 +30,11 @@
       </div>
       <div class="flex">
         <span class="text-left text-gray-200 mx-4 text-xl mb-4 lexend"
-          ><span class="text-4xl text-white lato">{{ reviewCount }}</span> Class
+          ><span class="text-4xl text-white">{{ reviewCount }}</span> Class
           Reviews</span
         >
         <span class="text-left text-gray-200 mx-4 text-xl mb-4 lexend"
-          ><span class="text-4xl text-white lato">{{ courseCount }}</span>
+          ><span class="text-4xl text-white">{{ courseCount }}</span>
           Registered Classes</span
         >
       </div>
@@ -118,7 +118,9 @@
               >
                 {{ index + 1 }}
               </div>
-              <div class="text-left text-xl">{{ course.class }}</div>
+              <div class="text-left text-xl">
+                <a :href="'/courses/view/' + course._id">{{ course.class }}</a>
+              </div>
               <div class="ml-auto text-2xl">
                 {{ course.factor
                 }}<span class="text-sm text-gray-500"> /10 </span>
@@ -168,6 +170,7 @@ export default {
       showtopRatedClasses: [],
       showhardestClasses: [],
       reviewCount: 0,
+      loading: true,
       courseCount: 0,
     };
   },
@@ -215,7 +218,6 @@ export default {
         _id: `${courses[i]._id}`,
       });
     }
-    console.log(hardestClasses);
 
     topRatedClasses.sort((a, b) => {
       return b.factor - a.factor;
@@ -252,7 +254,6 @@ export default {
         _id: `${courses[i]._id}`,
       });
     }
-    console.log(hardestClasses);
 
     hardestClasses.sort((a, b) => {
       return b.factor - a.factor;

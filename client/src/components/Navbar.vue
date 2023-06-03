@@ -13,7 +13,7 @@
       >
     </li>
     <li class="hidden md:block mr-6">
-      <a href="/write" class="align-middle p-2">Write a Review</a>
+      <a href="/write" class="align-middle p-2 lexend font-bold">Write a Review</a>
     </li>
     <li class="block md:hidden mr-6">
       <a href="/write" class="align-middle p-2 text-2xl">📋</a>
@@ -26,9 +26,10 @@
      </li> -->
     <li v-if="$store.state.loggedIn === true" class="hidden md:block ml-auto">
       <a
-        href="/view/profile"
-        class="block align-middle bg-blue-900 hover:bg-blue-800 text-white p-2 rounded"
-        >My Page</a
+        href="/login"
+        @click="logOut()"
+        class="block align-middle text-white bg-blue-900 hover:bg-blue-800 p-2 rounded lexend font-bold"
+        >Log Out</a
       >
     </li>
     <li v-if="$store.state.loggedIn === false" class="ml-auto">
@@ -40,11 +41,10 @@
     </li>
     <li v-else class="ml-5">
       <a
-        href="/login"
-        @click="logOut()"
-        class="block align-middle text-white bg-blue-900 hover:bg-blue-800 p-2 rounded"
-        >Log Out</a
-      >
+        href="/view/profile"
+        class="block align-middle bg-blue-900 hover:bg-blue-800 text-white p-2 rounded"
+        ><i class="fa-solid fa-gear text-xl" style="color: #ffffff"></i
+      ></a>
     </li>
   </ul>
 </template>

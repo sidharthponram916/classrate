@@ -23,10 +23,13 @@
         }}</span>
         through {{ review.type.toLowerCase() }} instruction.
       </p>
-      <h1 class="text-yellow-500 p-2 text-6xl">{{ rating(review.overall) }}</h1>
-      <span class="text-3xl p-2 m-2 font-bold"
+      <h1
+        v-html="rating(review.overall)"
+        class="text-5xl text-yellow-500 m-3 py-2"
+      ></h1>
+      <span class="text-3xl p-2 m-2 font-bold lexend"
         >Instructor -
-        <span class="text-gray-700 text-3xl font-light"
+        <span class="text-gray-700 text-3xl font-light lexend"
           >{{ review.instructor }}
         </span></span
       >
@@ -34,20 +37,20 @@
         <span class="text-3xl mt-2 mr-32"
           >Difficulty<br /><span
             :class="color.difficulty"
-            class="text-8xl lato"
+            class="text-8xl lexend"
             >{{ review.difficulty }}</span
           >/10</span
         >
         <span class="text-3xl mt-2 mr-32"
           >Engagement<br /><span
             :class="color.curriculum"
-            class="text-8xl lato"
+            class="text-8xl lexend"
           >
             {{ review.curriculum }}</span
           >/10</span
         >
         <span class="text-3xl mt-2 mr-32"
-          >Workload <br /><span :class="color.workload" class="text-8xl lato">{{
+          >Workload <br /><span :class="color.workload" class="text-8xl lexend">{{
             review.workload
           }}</span
           >/10</span
@@ -55,7 +58,7 @@
         <span class="text-3xl mt-2 mr-32"
           >Instructor<br /><span
             :class="color.instructorRating"
-            class="text-8xl lato"
+            class="text-8xl lexend"
           >
             {{ review.instructorRating }}</span
           >/10</span
@@ -89,15 +92,29 @@
         Share <i class="fa-solid fa-share ml-2"></i>
       </button>
     </div>
-    <!-- <div class = 'w-11/12 text-left mx-5 p-2 bg-white'>
-    <h1 class = 'text-left text-3xl text-black m-2'>Comments</h1>
-    <div class = 'p-1 m-2 border-2'> 
-       <div class = 'text-xl mx-2'>DogeMusic</div>
-         <div class = 'm-2 text-gray-600 '> I personally think that he should do better at teaching LMFAO </div>
-         <button class = 'p-2 m-2 text-black font-bold text-2xl rounded border-2'><img src = '../assets/reply.png' class = 'w-5 h-5'> </button> 
-       
-    </div>
-  </div> -->
+    <!-- <div class="w-11/12 text-left mx-5 p-2 bg-white">
+      <div class="p-2 m-2 border-2 bg-white w-3/4 rounded">
+        <div class="text-xl mx-2 lexend font-bold">
+          DogeMusic<span class="lexend text-sm font-light py-1 px-2"
+            >2 hours ago</span
+          >
+        </div>
+        <div class="m-2 text-gray-600 lexend font-semibold text-xl">
+          I honestly agree a lot! This AP class was way too easy. Wish it could
+          have been more challenging. LOL!
+        </div>
+      </div>
+      <div class="p-2 m-2 border-2 bg-white w-3/4 rounded">
+        <div class="text-xl mx-2 lexend font-bold">
+          Commando02<span class="lexend text-sm font-light py-1 px-2"
+            >2 hours ago</span
+          >
+        </div>
+        <div class="m-2 text-gray-600 lexend font-semibold text-xl">
+          Yea word.
+        </div>
+      </div>
+    </div> -->
     <div class="w-11/12 text-left m-5 p-2 bg-white lexend">
       <h1 class="text-left text-4xl text-black m-2 p-2 font-bold">
         Other Reviews
@@ -106,11 +123,14 @@
         <div v-for="review in randomSet" :key="review._id">
           <a :href="'/reviews/' + review._id">
             <div class="p-4 m-2 border-2 rounded bg-white h-full">
-              <h1 class="text-xl font-semibold">{{ review.course }}</h1>
-              <h1 class="text-sm text-gray-600 mb-2">{{ review.school }}</h1>
-              <h1 class="text-2xl text-yellow-500 mb-2">
-                {{ rating(review.overall) }}
+              <h1 class="text-xl font-semibold">
+                {{ review.course.slice(0, 18) }}
               </h1>
+              <h1
+                class="text-yellow-500 text-2xl"
+                v-html="rating(review.overall)"
+              ></h1>
+              <h1 class="text-sm text-gray-600 mb-2">{{ review.school }}</h1>
               <p style="font-family: ">{{ review.desc.slice(0, 100) }}...</p>
             </div>
           </a>
@@ -118,7 +138,29 @@
       </div>
     </div>
   </div>
-  <div v-else>Page not found!</div>
+  <div v-else class="mx-auto my-56">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="100"
+      height="100"
+      viewBox="00 0 50 50"
+    >
+      <!-- path code credited by https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/d -->
+      <path
+        fill="#2d40cf"
+        d="M25,5A20.14,20.14,0,0,1,45,22.88a2.51,2.51,0,0,0,2.49,2.26h0A2.52,2.52,0,0,0,50,22.33a25.14,25.14,0,0,0-50,0,2.52,2.52,0,0,0,2.5,2.81h0A2.51,2.51,0,0,0,5,22.88,20.14,20.14,0,0,1,25,5Z"
+      >
+        <animateTransform
+          attributeName="transform"
+          type="rotate"
+          from="0 25 25"
+          to="360 25 25"
+          dur="0.5s"
+          repeatCount="indefinite"
+        />
+      </path>
+    </svg>
+  </div>
 </template>
 
 <script>
@@ -141,6 +183,7 @@ export default {
         school: "",
       },
       data: "",
+      stars: "",
       all: "",
       search: "",
       message: "heloo",
@@ -306,19 +349,25 @@ ${localStorage.getItem("baseUrl")}${this.$route.fullPath} `;
     } else {
       this.color.upvote = "bg-sky-600";
     }
+
+    for (let i = 0; i < this.data.overall; i++) {
+      this.stars += "<i class='fa-solid fa-star'></i>";
+    }
+    for (let i = 0; i < 5 - this.data.overall; i++) {
+      this.stars += "<i class='fa-regular fa-star'></i>";
+    }
   },
   methods: {
     rating(num) {
-      let rating = "";
-
+      let html = "";
       for (let i = 0; i < num; i++) {
-        rating += "★";
+        html += "<i class='fa-solid fa-star'></i>";
       }
       for (let i = 0; i < 5 - num; i++) {
-        rating += "☆";
+        html += "<i class='fa-regular fa-star'></i>";
       }
 
-      return rating;
+      return html;
     },
     formatDate(dte) {
       // Courtesy of StackOverflow for this solution (With Personal Edits for my prj): https://stackoverflow.com/questions/39195470/converting-yyyy-mm-in-string-format-to-a-month-name-var-javascript#:~:text=Use%20the%20split()%20function,by%20typing%20res%5B1%5D%20.

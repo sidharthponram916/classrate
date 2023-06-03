@@ -17,12 +17,12 @@
           >Official Name
           <span class="text-sm">(Cannot be Changed) </span></label
         >
-        <input type="text" :class="style.input" v-model="data.name" disabled />
+        <input type="text" :class="style.input" v-model="data.name" />
         <br />
         <label class="text-left text-2xl"
           >State <span class="text-sm">(Cannot be Changed) </span></label
         >
-        <select :class="style.input" v-model="data.state" disabled>
+        <select :class="style.input" v-model="data.state">
           <option value="AL">Alabama</option>
           <option value="AK">Alaska</option>
           <option value="AZ">Arizona</option>
@@ -84,7 +84,6 @@
           placeholder="School Name"
           :class="style.input"
           v-model="data.city"
-          disabled
         />
         <br />
         <label class="text-left text-2xl">Address</label>

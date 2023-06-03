@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="course.name">
     <Searchbar />
     <div
       :style="'background:' + school.color"
@@ -15,22 +15,24 @@
               >{{ school.name }}
             </a></span
           ><br />
-          <h1 class="text-xl">
-            <span class="text-yellow-400 text-3xl">
-              {{ formatRating(Math.round(averages.rating)) }}</span
+          <h1 class="text-sm mt-2">
+            <span
+              class="text-yellow-400 text-2xl"
+              v-html="formatRating(Math.round(averages.rating))"
             >
+            </span>
           </h1>
         </h1>
       </div>
       <div class="flex">
         <h1 class="text-left text-gray-200 mx-4 text-xl mb-4">
-          <span class="text-4xl text-white lato">{{
+          <span class="text-4xl text-white font-bold">{{
             averages.rating.toFixed(1)
           }}</span>
           out of 5
         </h1>
         <h1 class="text-left text-gray-200 mx-4 text-xl mb-4">
-          <span class="text-4xl text-white lato">{{
+          <span class="text-4xl text-white font-bold">{{
             course.ratings.length
           }}</span>
           Ratings
@@ -43,28 +45,30 @@
       >
         <span class="text-3xl mt-2 mr-32 font-bold"
           >Difficulty<br /><span
-            class="text-8xl lato font-bold"
+            class="text-8xl lexend font-bold"
             :class="color.difficulty"
             >{{ averages.difficulty.toFixed(1) }}</span
           >/10</span
         >
         <span class="text-3xl mt-2 mr-32 font-bold"
           >Curriculum<br /><span
-            class="text-8xl lato"
+            class="text-8xl lexend"
             :class="color.curriculum"
             >{{ averages.curriculum.toFixed(1) }}</span
           >/10</span
         >
         <span class="text-3xl mt-2 mr-32 font-bold"
-          >Workload <br /><span class="text-8xl lato" :class="color.workload">{{
-            averages.workload.toFixed(1)
-          }}</span
+          >Workload <br /><span
+            class="text-8xl lexend"
+            :class="color.workload"
+            >{{ averages.workload.toFixed(1) }}</span
           >/10</span
         >
         <span class="text-3xl mt-2 mr-32 font-bold"
-          >Average GPA <br /><span class="text-8xl lato" :class="color.grade">{{
-            averages.grade.toFixed(2)
-          }}</span
+          >Average GPA <br /><span
+            class="text-8xl lexend"
+            :class="color.grade"
+            >{{ averages.grade.toFixed(2) }}</span
           >/4.00</span
         >
       </div>
@@ -92,7 +96,7 @@
         </div>
       </div>
 
-      <div class="p-2 m-2 text-3xl text-left">Ratings</div>
+      <div class="p-2 m-2 text-3xl font-bold text-left">Ratings</div>
       <div class="flex mx-2 overflow-y-auto">
         <div
           class="flex-none"
@@ -105,9 +109,10 @@
                 Student who finished this class in
                 {{ formatDate(rating.data.year) }}
               </h1>
-              <h1 class="text-5xl p-2 text-yellow-600">
-                {{ formatRating(rating.data.overall) }}
-              </h1>
+              <h1
+                class="text-3xl px-4 text-yellow-600"
+                v-html="formatRating(rating.data.overall)"
+              ></h1>
               <h1 class="text-md px-2 mx-2 my-2">
                 {{ rating.data.desc.trim("").slice(0, 99) }}...
               </h1>
@@ -116,6 +121,29 @@
         </div>
       </div>
     </div>
+  </div>
+  <div v-else class="mx-auto my-56">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="100"
+      height="100"
+      viewBox="0 0 50 50"
+    >
+      <!-- path code credited by https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/d -->
+      <path
+        fill="#2d40cf"
+        d="M25,5A20.14,20.14,0,0,1,45,22.88a2.51,2.51,0,0,0,2.49,2.26h0A2.52,2.52,0,0,0,50,22.33a25.14,25.14,0,0,0-50,0,2.52,2.52,0,0,0,2.5,2.81h0A2.51,2.51,0,0,0,5,22.88,20.14,20.14,0,0,1,25,5Z"
+      >
+        <animateTransform
+          attributeName="transform"
+          type="rotate"
+          from="0 25 25"
+          to="360 25 25"
+          dur="0.5s"
+          repeatCount="indefinite"
+        />
+      </path>
+    </svg>
   </div>
 </template>
 
@@ -213,31 +241,31 @@ export default {
           fingrades += 4.0;
           break;
         case "A-":
-          fingrades += 3.67;
+          fingrades += 4.0;
           break;
         case "B+":
-          fingrades += 3.33;
+          fingrades += 3.0;
           break;
         case "B":
           fingrades += 3.0;
           break;
         case "B-":
-          fingrades += 2.67;
+          fingrades += 3.0;
           break;
         case "C+":
-          fingrades += 2.33;
+          fingrades += 2.0;
           break;
         case "C":
           fingrades += 2.0;
           break;
         case "C-":
-          fingrades += 1.67;
+          fingrades += 2.0;
           break;
         case "D":
-          fingrades += 1.33;
+          fingrades += 1.0;
           break;
         case "F":
-          fingrades += 1.0;
+          fingrades += 0.0;
           break;
         case "N/A":
           grades.length = grades.length - 1;
@@ -381,16 +409,15 @@ export default {
   },
   methods: {
     formatRating(num) {
-      let rating = "";
-
+      let html = "";
       for (let i = 0; i < num; i++) {
-        rating += "★";
+        html += "<i class='fa-solid fa-star'></i>";
       }
       for (let i = 0; i < 5 - num; i++) {
-        rating += "☆";
+        html += "<i class='fa-regular fa-star'></i>";
       }
 
-      return rating;
+      return html;
     },
     formatDate(dte) {
       // Courtesy of StackOverflow for this solution (With Personal Edits for my prj): https://stackoverflow.com/questions/39195470/converting-yyyy-mm-in-string-format-to-a-month-name-var-javascript#:~:text=Use%20the%20split()%20function,by%20typing%20res%5B1%5D%20.

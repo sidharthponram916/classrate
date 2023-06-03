@@ -103,11 +103,10 @@ export default {
     async sendPasswordEmail() {
       let email = prompt("Enter your email to reset your password.");
 
-      let { data } = await this.$http.post("/users/email_preset", {
+      await this.$http.post("/users/email_preset", {
         email: email,
       });
 
-      console.log(data);
     },
     async authenticateWithGoogle(res) {
       try {

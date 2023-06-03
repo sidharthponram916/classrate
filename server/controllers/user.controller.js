@@ -172,7 +172,7 @@ module.exports = {
 
       if (!user) {
         let newuser = await User.create({
-          username: req.body.name,
+          username: req.body.email,
           email: req.body.email,
           password: req.body.jti,
           verified: true,

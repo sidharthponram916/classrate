@@ -9,7 +9,7 @@
       <p class="text-md m-2 p-2 font-semibold">
         Please fill out the information below respectfully in order to make a
         review. Reviews are 100% anonymous, so you do not have to risk identity
-        leaks. With that, thank you for contributing to
+        leaks. Inappropriate reviews will immediately be taken down by moderators. With that, thank you for contributing to
         <span class="font-bold">
           Class<span class="text-yellow-300">Rate</span></span
         >.
@@ -21,8 +21,8 @@
           <label class="text-left">Select Class Type.</label>
           <br />
           <select :class="style.input" v-model="ap">
-            <option value="Yes" class = 'font-bold'>AP</option>
-            <option value="No" class = 'font-bold'>Custom</option>
+            <option value="Yes" class="font-bold">AP</option>
+            <option value="No" class="font-bold">Honors/Advanced/On-Level/Other</option>
           </select>
           <br />
           <label v-if="ap == 'No'" class="text-left"
@@ -316,8 +316,12 @@
                 </div>
               </div>
             </div>
-
             <h1 class="text-center mt-4">
+              <h1 class="text-white">
+                Please click this button only once. It takes a while for the
+                review request to be sent.
+              </h1>
+              <br />
               <button
                 type="button"
                 class="text-xl p-2 bg-green-500 m-auto rounded text-white"
@@ -402,7 +406,7 @@ export default {
         input:
           "p-2 mt-2 mb-2 w-11/12 text-xl bg-gray-200 text-black border-b-2 border-white focus:outline-none font-semibold",
       },
-      ap: "Yes",
+      ap: "No",
       data: {
         overall: 3,
         workload: 5,
@@ -465,10 +469,7 @@ export default {
     selectSchool(school) {
       this.data.school = school;
     },
-    filter() {
-      let { schools } = this;
-      console.log(schools);
-    },
+
     turnPage2() {
       this.page2 = true;
       this.page1 = false;
@@ -596,7 +597,7 @@ export default {
           grade: this.data.grade,
           school: this.data.school.name,
           school_id: this.data.school._id,
-          instructor: this.data.instructor,
+          instructor: this.data.instructor.trim(""),
           desc: this.data.desc,
           difficulty: this.data.difficulty,
           type: this.data.type,
@@ -630,7 +631,6 @@ export default {
         let teacher = await this.$http.get(
           `/teachers/getbysan/${this.data.instructor}/${this.data.school._id}`
         );
-
         if (!teacher.data) {
           await this.$http.post("/teachers/create", {
             name: this.data.instructor,
@@ -677,7 +677,7 @@ h1 img {
   width: 40px;
   height: 40px;
 }
-option { 
+option {
   font-weight: 70px;
 }
 </style>

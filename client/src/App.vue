@@ -2,9 +2,31 @@
   <div id="app" class="flex flex-col min-h-screen">
     <Navbar />
     <router-view />
-    <div class="mt-auto text-center p-4 text-white bg-blue-500 mt-2">
-      Copyright &copy; Class<span class="text-yellow-200">Rate</span>
-      2022-2023 All rights reserved.
+    <div class="flex mt-auto text-center lexend font-bold text-white mt-16">
+      <div class="bg-blue-700 p-2 w-1/3  border-white">
+        <i class="ml-2 fa-brands fa-instagram text-xl align-middle"></i>
+        <a
+          href="https://instagram.com/classrateofficial"
+          target="_blank"
+          class = 'align-middle'
+        >
+          @classrateofficial
+        </a>
+      </div>
+      <div class="bg-blue-700 p-2 w-1/3 text-white lexend font-bold">
+        Copyright &copy; Class<span class="text-yellow-200">Rate</span>
+        2022-2023 All rights reserved.
+      </div>
+      <div class="bg-blue-700 p-2 w-1/3 border-white">
+        Feedback?
+        <a
+          class="text-blue-100"
+          href="https://bit.ly/crsuggestions"
+          target="_blank"
+        >
+          https://bit.ly/crsuggestions
+        </a>
+      </div>
     </div>
   </div>
 </template>
@@ -49,12 +71,12 @@ button:disabled {
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: none;
+  background: white;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: rgb(198, 192, 192);
+  background: rgb(216, 216, 210);
 }
 
 /* Handle on hover */
@@ -63,7 +85,7 @@ button:disabled {
 }
 
 body {
-  background: rgb(200, 215, 235);
+  background: #cbd5e1;
 }
 
 #app {

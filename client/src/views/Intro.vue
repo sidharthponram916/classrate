@@ -119,9 +119,8 @@ export default {
       .sort((a, b) => {
         return this.getReviewCount(b._id) - this.getReviewCount(a._id);
       })
-      .slice(0, 20);
+      .slice(0, 21);
 
-    console.log(this.schools);
   },
   methods: {
     getReviewCount(school_id) {

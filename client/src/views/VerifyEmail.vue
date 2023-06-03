@@ -32,11 +32,9 @@ export default {
         token: this.$route.params.token,
       });
 
-      console.log(user.data.user);
 
       this.$store.commit("setUserData", user.data);
 
-      console.log(this.$store.state.userData);
 
       this.status = true;
     } catch (e) {

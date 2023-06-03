@@ -233,23 +233,19 @@ export default {
     async sendVerificationEmail() {
       alert("Verification email sent. Please check your inbox.");
 
-      let { data } = await this.$http.post("/users/email", {
+      await this.$http.post("/users/email", {
         email: this.user.email,
         username: this.user.username,
       });
-
-      console.log(data);
     },
 
     async sendPasswordResetEmail() {
       alert("Password reset email has been sent to your inbox.");
 
-      let { data } = await this.$http.post("/users/email_preset", {
+      await this.$http.post("/users/email_preset", {
         email: this.user.email,
         username: this.user.username,
       });
-
-      console.log(data);
     },
   },
 };
