@@ -7,7 +7,7 @@ await mongoose.connect(process.env.DB_URI, {
     useUnifiedTopology: true,
   }, () => { 
     try { 
-     console.log("Database has started"); 
+     console.log("MongoDB database is up."); 
     }
     catch (e) { 
         console.log("There was an error: " + e.message); 

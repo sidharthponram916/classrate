@@ -126,7 +126,7 @@
         <h1 class="text-xl font-semibold">{{ review.course }}</h1>
         <h1 class="text-sm">{{ review.school }}</h1>
         <button class="my-2 bg-blue-600 p-2 rounded text-white mr-2">
-          <a :href="'/reviews/' + review._id"> View </a>
+          <a :href="'/reviews/view/' + review._id"> View </a>
         </button>
         <button
           @click="deleteReview(review._id)"
@@ -154,6 +154,7 @@ export default {
     };
   },
   async beforeCreate() {
+    document.title = "My Profile - Classrate.org"
     let { data } = await this.$http.get("/users/current");
     this.user = data;
 

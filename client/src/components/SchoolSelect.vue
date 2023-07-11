@@ -26,7 +26,7 @@
     </div>
     <div
       @click="unselectSchool()"
-      class="flex p-2 bg-gray-100 w-11/12 mb-2 mt-2 border-2 cursor-pointer"
+      class="cursor-pointer flex p-2 w-11/12 text-left bg-gray-100 mb-1 text-black border-2"
       v-else
     >
       <img :src="selected.url" class="rounded-full mr-2 w-16 h-16" />
@@ -63,6 +63,8 @@ export default {
         return school._id === this.$store.state.userData.school;
       });
 
+      this.selectSchool(this.selected._id);
+
       this.viewSB = false;
     }
   },
@@ -80,7 +82,7 @@ export default {
       let value = this.schools.find((school) => {
         return school._id === id;
       });
-      
+
       this.viewSB = false;
 
       this.selected = value;

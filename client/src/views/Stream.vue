@@ -52,7 +52,7 @@
             class="mt-16 p-2 text-xl text-white font-semibold rounded"
             :style="'background:' + school.color"
           >
-            <a :href="'/reviews/' + schoolReviews[0]._id"> View More </a>
+            <a :href="'/reviews/view/' + schoolReviews[0]._id"> View More </a>
           </button>
         </div>
         <div
@@ -76,7 +76,7 @@
                 class="lexend mt-3 p-2 text-white font-semibold rounded hover:bg-gray-200"
                 :style="'background:' + school.color"
               >
-                <a :href="'/reviews/' + review._id"> View More </a>
+                <a :href="'/reviews/view/' + review._id"> View More </a>
               </button>
             </div>
           </div>
@@ -102,7 +102,7 @@
             <button
               class="lexend mt-2 bg-white p-2 border-2 rounded hover:bg-gray-200"
             >
-              <a :href="'/reviews/' + review._id"> View More </a>
+              <a :href="'/reviews/view/' + review._id"> View More </a>
             </button>
           </div>
         </div>
@@ -128,6 +128,8 @@ export default {
     };
   },
   async beforeMount() {
+    document.title = "Stream - ClassRate.org";
+
     if (!this.$store.state.loggedIn) return location.replace("/");
   },
   async created() {

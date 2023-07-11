@@ -13,9 +13,9 @@
             {{ school.address }} - {{ school.city }}, {{ school.state }}
           </h1>
         </h1>
-        <!-- <h1 class="text-left ml-auto">
-          <a :href="'/schools/edit/' + school._id"> Edit Information </a>
-        </h1> -->
+        <h1 class="text-left ml-auto">
+          <a :href="'/schools/builder/' + school._id"> Enter Class Builder </a>
+        </h1> 
       </div>
       <div v-if="school.website != ''">
         <h1 class="text-left mx-4 text-xl mb-4">
@@ -34,8 +34,8 @@
           Reviews</span
         >
         <span class="text-left text-gray-200 mx-4 text-xl mb-4 lexend"
-          ><span class="text-4xl text-white">{{ courseCount }}</span>
-          Registered Classes</span
+          ><span class="text-4xl text-white">{{ courseCount }}</span> Registered
+          Classes</span
         >
       </div>
     </div>
@@ -80,7 +80,10 @@
                 {{ index + 1 }}
               </div>
               <div class="text-left text-xl">{{ course.class }}</div>
-              <div class="ml-auto text-2xl">
+              <div
+                class="ml-auto text-3xl"
+                :class="colorCodeRate(course.factor)"
+              >
                 {{ course.factor
                 }}<span class="text-sm text-gray-500"> /5 </span>
               </div>
@@ -114,14 +117,14 @@
               :key="course._id"
             >
               <div
-                class="text-left bg-green-500 h-7 text-xl w-7 text-center text-white mr-2"
+                class="text-left bg-blue-500 h-7 text-xl w-7 text-center text-white mr-2"
               >
                 {{ index + 1 }}
               </div>
               <div class="text-left text-xl">
                 <a :href="'/courses/view/' + course._id">{{ course.class }}</a>
               </div>
-              <div class="ml-auto text-2xl">
+              <div class="ml-auto text-3xl" :class="colorCoding(course.factor)">
                 {{ course.factor
                 }}<span class="text-sm text-gray-500"> /10 </span>
               </div>
@@ -264,12 +267,53 @@ export default {
     this.reviewCount = reviews;
     // Other leaderboards are here.e.
   },
+
   methods: {
     showMore(feature) {
       this[`show${feature}`] = this[`${feature}`];
     },
     showLess(feature) {
       this[`show${feature}`] = this[`${feature}`].slice(0, 5);
+    },
+    colorCodeRate(n) {
+      switch (Math.round(n)) {
+        case 5:
+          return "text-green-600";
+        case 4:
+          return "text-green-500";
+
+        case 3:
+          return "text-yellow-500";
+
+        case 2:
+          return "text-yellow-600";
+
+        case 1:
+          return "text-red-500";
+      }
+    },
+    colorCoding(n) {
+      if (n >= 10) {
+        return "text-red-600";
+      } else if (n >= 9) {
+        return "text-red-500";
+      } else if (n >= 8) {
+        return "text-yellow-600";
+      } else if (n >= 7) {
+        return "text-yellow-500";
+      } else if (n >= 6) {
+        return "text-yellow-400";
+      } else if (n >= 5) {
+        return "text-green-500";
+      } else if (n >= 4) {
+        return "text-green-500";
+      } else if (n >= 3) {
+        return "text-green-500";
+      } else if (n >= 2) {
+        return "text-green-600";
+      } else {
+        return "text-green-700";
+      }
     },
   },
 };

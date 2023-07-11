@@ -20,7 +20,7 @@
             RID: <span class="font-light">{{ review._id }}</span>
           </h1>
           <button class="p-2 text-sm bg-gray-200 text-black rounded mr-2">
-            <a :href="'/reviews/' + review._id"> View </a>
+            <a :href="'/reviews/view/' + review._id"> View </a>
           </button>
           <button
             @click="remove('review', review._id)"

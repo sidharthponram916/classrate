@@ -34,5 +34,5 @@ if (process.env.NODE_ENV === "production") {
 }
 
 app.listen(process.env.PORT || 2022, () => {
-  console.log("ReviewMyCoufrse Server Up and Running!");
+  console.log("ClassRate servers up and running at Port " + process.env.PORT + ". ");
 });

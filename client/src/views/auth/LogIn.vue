@@ -60,6 +60,8 @@ export default {
     };
   },
   async mounted() {
+    document.title = "Sign In - Classrate.org";
+
     window.google.accounts.id.initialize({
       client_id:
         "199941469614-tcdpve2r36ljnm2o504ptn992udrj75e.apps.googleusercontent.com",
@@ -106,7 +108,6 @@ export default {
       await this.$http.post("/users/email_preset", {
         email: email,
       });
-
     },
     async authenticateWithGoogle(res) {
       try {

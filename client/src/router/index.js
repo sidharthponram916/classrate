@@ -1,6 +1,5 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "../views/Intro.vue";
 
 Vue.use(VueRouter);
 
@@ -8,7 +7,7 @@ const routes = [
   {
     path: "/",
     name: "Intro",
-    component: Home,
+    component: () => import("../views/Landing.vue"),
   },
   {
     path: "/view/stream",
@@ -31,7 +30,7 @@ const routes = [
   {
     path: "/write",
     name: "Write",
-    component: () => import("../views/Write.vue"),
+    component: () => import("../views/review/WriteReview.vue"),
     meta: {
       authProtected: true,
       verified: true,
@@ -46,9 +45,9 @@ const routes = [
     },
   },
   {
-    path: "/reviews/:id",
+    path: "/reviews/view/:id",
     name: "ReviewView",
-    component: () => import("../views/ReviewView.vue"),
+    component: () => import("../views/review/ReviewView.vue"),
   },
   {
     path: "/schools/add",
@@ -73,6 +72,16 @@ const routes = [
     },
   },
   {
+    path: "/schools/builder/:id",
+    name: "Class Builder",
+    component: () => import("../views/school/builder/ClassBuilder.vue"),
+  },
+  { 
+    path: "/tools/builder/connect", 
+    name: "Builder Connect", 
+    component: () => import("../views/school/builder/BuilderConnect.vue")
+  },
+  {
     path: "/courses/view/:id",
     name: "CourseView",
     component: () => import("../views/course/CourseView.vue"),
@@ -80,12 +89,12 @@ const routes = [
   {
     path: "/user/:id/confirm/:token",
     name: "VerifyEmail",
-    component: () => import("../views/VerifyEmail.vue"),
+    component: () => import("../views/auth/VerifyEmail.vue"),
   },
   {
     path: "/user/:id/resetpwd/:token",
     name: "ResetPassword",
-    component: () => import("../views/ResetPassword.vue"),
+    component: () => import("../views/auth/ResetPassword.vue"),
   },
   {
     path: "/admin/44_ajk2dfsd7f5adsfadslfjdsaf4w22247f42",

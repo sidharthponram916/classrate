@@ -13,7 +13,14 @@
       >
     </li>
     <li class="hidden md:block mr-6">
-      <a href="/write" class="align-middle p-2 lexend font-bold">Write a Review</a>
+      <a href="/write" class="align-middle p-2 lexend font-bold"
+        >Write a Review</a
+      >
+    </li> 
+     <li class="hidden md:block mr-6">
+      <a href="/tools/builder/connect" class="align-middle p-2 lexend font-bold"
+        >Class Builder</a
+      >
     </li>
     <li class="block md:hidden mr-6">
       <a href="/write" class="align-middle p-2 text-2xl">📋</a>
@@ -33,11 +40,7 @@
       >
     </li>
     <li v-if="$store.state.loggedIn === false" class="ml-auto">
-      <a
-        class="block align-middle bg-blue-600 hover:bg-blue-500 p-2 rounded cursor-pointer"
-        href="/login"
-        >Sign In</a
-      >
+      <button><div><a href = "/login">Sign In</a></div></button>
     </li>
     <li v-else class="ml-5">
       <a
@@ -50,13 +53,48 @@
 </template>
 
 <script>
+import decode from "jwt-decode";
 export default {
   data() {},
+  async mounted() {
+    window.google.accounts.id.initialize({
+      client_id:
+        "199941469614-tcdpve2r36ljnm2o504ptn992udrj75e.apps.googleusercontent.com",
+      callback: this.authenticateWithGoogle,
+      auto_select: false,
+    });
+
+    window.google.accounts.id.renderButton(this.$refs.googleLoginBtn, {
+      text: "signin_with",
+      size: "large",
+      theme: "outline",
+      logo_alignment: "left",
+      auto_select: true,
+    });
+  },
   methods: {
     async logOut() {
       localStorage.removeItem("token");
       delete this.$http.defaults.headers.common["Authorization"];
       this.$store.commit("logOut");
+    },
+    async authenticateWithGoogle(res) {
+      try {
+        let user = decode(res.credential);
+
+        let { data } = await this.$http.post("/users/googleauth", user);
+
+        this.$store.commit("logIn");
+        this.$store.commit("setUserdata", data.user);
+
+        localStorage.setItem("token", data.token);
+
+        this.$http.defaults.headers.common["Authorization"] = data.token;
+
+        location.replace("/view/stream");
+      } catch (e) {
+        console.log(e.message);
+      }
     },
   },
 };

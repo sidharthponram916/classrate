@@ -3,21 +3,33 @@
     <Navbar />
     <router-view />
     <div class="flex mt-auto text-center lexend font-bold text-white mt-16">
-      <div class="bg-blue-700 p-2 w-1/3  border-white">
-        <i class="ml-2 fa-brands fa-instagram text-xl align-middle"></i>
-        <a
-          href="https://instagram.com/classrateofficial"
-          target="_blank"
-          class = 'align-middle'
-        >
-          @classrateofficial
-        </a>
+      <div class="flex bg-blue-700 w-1/3 border-white">
+        <div class="w-1/2 p-2" style="background: #c13584">
+          <i class="ml-2 fa-brands fa-instagram text-xl align-middle"></i>
+          <a
+            href="https://instagram.com/classrateofficial"
+            target="_blank"
+            class="align-middle"
+          >
+            @classrateofficial
+          </a>
+        </div>
+        <div class="w-1/2 p-2" style="background: #7289da">
+          <a
+            href="https://discord.gg/5mT66X93yN"
+            target="_blank"
+            class="align-middle"
+          >
+            <i class="fa-brands fa-discord"></i>
+            Join our Discord
+          </a>
+        </div>
       </div>
       <div class="bg-blue-700 p-2 w-1/3 text-white lexend font-bold">
         Copyright &copy; Class<span class="text-yellow-200">Rate</span>
         2022-2023 All rights reserved.
       </div>
-      <div class="bg-blue-700 p-2 w-1/3 border-white">
+      <div class="bg-blue-900 p-2 w-1/3 border-white">
         Feedback?
         <a
           class="text-blue-100"
@@ -76,7 +88,7 @@ button:disabled {
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: rgb(216, 216, 210);
+  background: rgb(153, 153, 148);
 }
 
 /* Handle on hover */

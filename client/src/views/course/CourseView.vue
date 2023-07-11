@@ -104,7 +104,7 @@
           :key="rating.data._id"
         >
           <div class="rounded border-2 m-2 text-left inline-block w-auto">
-            <a :href="'/reviews/' + rating.data._id">
+            <a :href="'/reviews/view/' + rating.data._id">
               <h1 class="text-2xl px-2 mx-2 my-2 font-bold">
                 Student who finished this class in
                 {{ formatDate(rating.data.year) }}
@@ -268,12 +268,19 @@ export default {
           fingrades += 0.0;
           break;
         case "N/A":
-          grades.length = grades.length - 1;
+          fingrades += 0.0;
           break;
       }
 
       if (i === grades.length - 1) {
+        for (grade of grades) {
+          if (grade === "N/A") {
+            grades.length = grades.length - 1;
+          }
+        }
+
         fingrades = fingrades / grades.length;
+        break;
       }
     }
 
