@@ -1,7 +1,8 @@
 import ReviewModel, { Review } from '~/server/models/review';
 
 /**
- * Retrieves all reviews from the database.
+ * This function is a event handler for the GET /api/reviews/all endpoint.
+ * It retrieves all reviews from the database.
  * @param _event - The event object.
  * @returns A promise that resolves to an array of Review objects if successful, or an error object if there was an error.
  * @example
