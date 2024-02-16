@@ -7,11 +7,11 @@ import dotenv from 'dotenv';
  * @param _nitroApp - Nitro instance
  */
 export default async (_nitroApp: Nitro) => {
-    dotenv.config(); // Load environment variables
-    try {
-        await mongoose.connect(process.env.DB_URI); // Connect to MongoDB
-        console.log("Connected to MongoDB"); // Log success message
-    } catch (e) {
-        console.error(e); // Log error message
-    }
+	dotenv.config(); // Load environment variables
+	try {
+		await mongoose.connect(process.env.DB_URI); // Connect to MongoDB
+		console.log("Connected to MongoDB"); // Log success message
+	} catch (e) {
+		console.error(e); // Log error message
+	}
 };
