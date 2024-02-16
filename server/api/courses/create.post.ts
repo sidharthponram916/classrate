@@ -20,13 +20,13 @@ import { Error } from 'mongoose';
  * })
  */
 export default defineEventHandler(async (event) => {
-    let body = await readBody(event); // Extract the request body from the event object
-    try {
-        const course: Course = await CourseModel.create(body); // Create a new course in the database
-        return course; // Return the newly created course
-    } catch (error) {
-        if (error instanceof Error) { // Check if the error is an instance of the mongoose Error class
-            return {error: error.message};
-        }
-    }
+	let body = await readBody(event); // Extract the request body from the event object
+	try {
+		const course: Course = await CourseModel.create(body); // Create a new course in the database
+		return course; // Return the newly created course
+	} catch (error) {
+		if (error instanceof Error) { // Check if the error is an instance of the mongoose Error class
+			return { error: error.message };
+		}
+	}
 })

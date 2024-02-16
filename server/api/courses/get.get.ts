@@ -10,28 +10,28 @@ import CourseModel, { type Course } from '~/server/models/course';
  * useFetch('api/courses/get?school_id=<school-id>&course=<course-name>')
  */
 export default defineEventHandler(async (event) => {
-    let params = getQuery(event); // Extract query parameters from the event object
-    if (!params.school_id || !params.course) { // Check if the required parameters are missing
-        return { // Return an error object with a message indicating the missing parameters
-            error: "Missing required parameters: school_id or course" //
-        };
-    }
+	let params = getQuery(event); // Extract query parameters from the event object
+	if (!params.school_id || !params.course) { // Check if the required parameters are missing
+		return { // Return an error object with a message indicating the missing parameters
+			error: "Missing required parameters: school_id or course" //
+		};
+	}
 
-    try {
-        const course: Course | null = await CourseModel.findOne({
-            $and: [
-                { school_id: params.school_id },
-                { name: params.course },
-            ],
-        }); // Find the course based on the provided school ID and course name
+	try {
+		const course: Course | null = await CourseModel.findOne({
+			$and: [
+				{ school_id: params.school_id },
+				{ name: params.course },
+			],
+		}); // Find the course based on the provided school ID and course name
 
-        // Return the course object if it is found
-        return course === null ? { error: "Course not found" } : course;
-    } catch (error: any) {
-        if (error instanceof Error) { // Check if the error is an instance of the mongoose Error class
-            return { // Return an error object with the error message
-                error: error.message
-            };
-        }
-    }
+		// Return the course object if it is found
+		return course === null ? { error: "Course not found" } : course;
+	} catch (error: any) {
+		if (error instanceof Error) { // Check if the error is an instance of the mongoose Error class
+			return { // Return an error object with the error message
+				error: error.message
+			};
+		}
+	}
 })

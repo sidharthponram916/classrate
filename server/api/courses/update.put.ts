@@ -21,23 +21,23 @@ import isAdmin from '~/server/config/isAdmin';
  * })
  */
 export default defineEventHandler(async (event) => {
-    let param = getQuery(event); // Extract query parameters from the event object
-    let body = await readBody(event); // Extract the request body from the event object
-    let { req } = event.node; // Extract the request object from the event object
-    
-    if (!param.id) {
-        return { error: "Missing required parameter: id" }; // Return an error object with a message indicating the missing parameters
-    }
+	let param = getQuery(event); // Extract query parameters from the event object
+	let body = await readBody(event); // Extract the request body from the event object
+	let { req } = event.node; // Extract the request object from the event object
 
-    try {
-        if (!isAdmin(req.user?._id)) return { error: "Forbidden Request created!" } // Check if the user is an admin
-        
-        const course: Course | null = await CourseModel.findByIdAndUpdate(param.id, body); // Update the course based on the provided course ID
-        
-        return course; // Return the course object if it is found
-    } catch (error) {
-        if (error instanceof Error) { // Check if the error is an instance of the mongoose Error class
-            return { error: error.message }; // Return an error object with the error message
-        }
-    }
+	if (!param.id) {
+		return { error: "Missing required parameter: id" }; // Return an error object with a message indicating the missing parameters
+	}
+
+	try {
+		if (!isAdmin(req.user?._id)) return { error: "Forbidden Request created!" } // Check if the user is an admin
+
+		const course: Course | null = await CourseModel.findByIdAndUpdate(param.id, body); // Update the course based on the provided course ID
+
+		return course; // Return the course object if it is found
+	} catch (error) {
+		if (error instanceof Error) { // Check if the error is an instance of the mongoose Error class
+			return { error: error.message }; // Return an error object with the error message
+		}
+	}
 })
