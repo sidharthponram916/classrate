@@ -2,9 +2,12 @@ import AdminModel, { type Admin } from "../../models/admin";
 import { Error } from "mongoose";
 
 /**
- * Get all admins
+ * This is function is an event handler for the GET /api/admins/all endpoint.
+ * It gets all admins
  * @param event - Event data
  * @returns - Admins
+ * @example
+ * useFetch('api/admins/all')
  */
 export default defineEventHandler(async (event) => {
 	try {
