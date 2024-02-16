@@ -1,5 +1,6 @@
 import { Document, model, Schema } from 'mongoose';
 
+// Define the TeacherReview interface
 interface TeacherReview extends Document {
   name: string;
   school: string;
@@ -13,6 +14,7 @@ interface TeacherReview extends Document {
   createdAt?: string;
 }
 
+// Create the TeacherReview schema
 const teacherReviewSchema = new Schema<TeacherReview>({
   name: {
     type: String,
@@ -56,4 +58,5 @@ const teacherReviewSchema = new Schema<TeacherReview>({
   },
 });
 
+// Export the TeacherReview model
 export default model<TeacherReview>('teacher_reviews', teacherReviewSchema);

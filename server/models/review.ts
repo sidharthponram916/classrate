@@ -1,5 +1,6 @@
 import { Schema, model, Document } from 'mongoose';
 
+// Define the Review interface
 export interface Review extends Document {
     username: string;
     user_id: string;
@@ -20,6 +21,7 @@ export interface Review extends Document {
     createdAt: Date;
 };
 
+// Create the Review schema
 const reviewSchema = new Schema<Review>({
     username: {
         type: String,
@@ -91,4 +93,5 @@ const reviewSchema = new Schema<Review>({
     }
 })
 
+// Export the Review model
 export default model<Review>('reviews', reviewSchema);

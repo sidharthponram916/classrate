@@ -1,5 +1,6 @@
 import { Document, model, Schema } from "mongoose";
 
+// Define the Course interface
 export interface Course extends Document {
     name: string;
     category: string;
@@ -8,6 +9,7 @@ export interface Course extends Document {
     ratings?: Array<number>;
 };
 
+// Create the Course schema
 const courseSchema = new Schema<Course>({ 
     name: { 
         type: String, 
@@ -31,4 +33,5 @@ const courseSchema = new Schema<Course>({
     }
 });
 
+// Export the Course model
 export default model<Course>('courses', courseSchema);

@@ -1,5 +1,6 @@
 import { Document, model, Schema } from 'mongoose';
 
+// Define the Teacher interface
 interface Teacher extends Document {
     name: string;
     school: string;
@@ -8,6 +9,7 @@ interface Teacher extends Document {
     ratings?: number[];
 }
 
+// Create the Teacher schema
 const teacherSchema = new Schema<Teacher>({
     name: {
         type: String,
@@ -31,4 +33,5 @@ const teacherSchema = new Schema<Teacher>({
     },
 });
 
+// Export the Teacher model
 export default model<Teacher>('teachers', teacherSchema);

@@ -1,11 +1,13 @@
 import { Document, model, Schema, Types } from 'mongoose';
 
+// Define the Token interface
 export interface Token extends Document {
     userId: Types.ObjectId;
     token: string;
     createdAt?: Date;
 }
 
+// Create the Token schema
 const tokenSchema = new Schema<Token>({
     userId: {
         type: Schema.Types.ObjectId,
@@ -24,4 +26,5 @@ const tokenSchema = new Schema<Token>({
     },
 });
 
+// Export the Token model
 export default model<Token>('tokens', tokenSchema);

@@ -1,5 +1,6 @@
 import { Schema, model, Document } from 'mongoose'; 
 
+// Define the School interface
 export interface School extends Document {
     name: string;
     url: string;
@@ -14,6 +15,7 @@ export interface School extends Document {
     other?: Object;
 }
 
+// Create the School schema
 const schoolSchema = new Schema<School>({ 
      name: { 
         type: String, 
@@ -61,4 +63,5 @@ const schoolSchema = new Schema<School>({
      }
 })
 
+// Export the School model
 export default model<School>('schools', schoolSchema); 
