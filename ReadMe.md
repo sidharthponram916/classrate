@@ -11,3 +11,4 @@ Detailed below is the tech stack used for the website.
 1) **Languages**: HTML, CSS, JavaScript 
 2) **Frontend**: Vue.js + TailwindCSS
 3) **Backend**: Node.js, Express.js + MongoDB
+4) **Deployment**: AWS Route 53, Amazon S3 + Heroku DNS
