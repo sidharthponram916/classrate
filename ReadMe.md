@@ -1,5 +1,3 @@
-# ClassRate.org
-
 ## What is ClassRate? 
 ClassRate is a web app that allows students to
    - Express their opinion through reviewing their classes online. 
@@ -7,10 +5,8 @@ ClassRate is a web app that allows students to
    - Look through school and course pages compiled with existing review data. 
    - Use ClassBuilder to make predictions on success in specified courseloads. 
 
-## Credentials
-
-ClassRate accumulates 1,250+ unique visitors per month, and has 140+ courses reviews within launch. Please spread the word about ClassRate as it can be a useful tool as more reviews are made on our site! 
-
-## For Developers 
-
-Contact me on Discord (vaderai) for more information about developing on our codebase. 
+## Technology Stack 
+Detailed below is the tech stack used for classrate 
+   1) Languages: HTML, CSS, JavaScript 
+   2) Frontend: Vue.js + TailwindCSS
+   3) Backend: Node.js, Express.js + MongoDB
