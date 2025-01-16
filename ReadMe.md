@@ -1,4 +1,4 @@
-## What is ClassRate? 
+# ClassRate Docs 
 ClassRate is a web app that allows students to
    - Express their opinion through reviewing their classes online. 
    - Easily sign in with Google or create their own account. 
