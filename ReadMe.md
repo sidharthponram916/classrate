@@ -8,6 +8,6 @@ ClassRate is a web app that allows students to
 ## Technology Stack 
 Detailed below is the tech stack used for the website.
 
-**Languages**: HTML, CSS, JavaScript 
-**Frontend**: Vue.js + TailwindCSS
-**Backend**: Node.js, Express.js + MongoDB
+1) **Languages**: HTML, CSS, JavaScript 
+2) **Frontend**: Vue.js + TailwindCSS
+3) **Backend**: Node.js, Express.js + MongoDB
